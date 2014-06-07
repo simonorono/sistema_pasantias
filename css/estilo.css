@@ -1,0 +1,241 @@
+@charset "utf-8";
+BODY  {
+    font-family : verdana,arial,helvetica;
+    font-size : 10pt;
+}
+
+td  {
+    font-family : verdana,arial,helvetica;
+    font-size : 10pt;
+}
+tr{
+    border-color:#666;
+    border-style:ridge;
+    border-spacing:10px;
+}
+INPUT  {
+    border-width: thin;
+    border-radius: 3px;
+    font-family : verdana,arial,helvetica;
+    font-size : 10pt;
+}
+
+TEXTAREA  {
+    font-family : verdana,arial,helvetica;
+    font-size : 8pt;
+}
+
+SELECT  {
+    font-family : verdana,arial,helvetica;
+    font-size : 8pt;
+}
+
+.altn  {
+    font-family : verdana,arial,helvetica;
+    font-size : 10pt;
+    color: #ffffff;
+    background-color: #03C;
+}
+
+.tit  {
+    font-family : verdana,arial,helvetica;
+    font-size : 10pt;
+    color: #ffffff;
+    background-color: #00F;
+    font-weight: bold;
+}
+
+.hoy {
+    font-family : verdana,arial,helvetica;
+    font-size : 10pt;
+    color: #00C;
+    font-weight: bold;
+}
+
+.domingo {
+    font-family : verdana,arial,helvetica;
+    font-size : 10pt;
+    color: #42413C;
+}
+label {
+    display: inline-block;
+    font-size: 10pt;
+    width: 140px;
+}
+
+.diario {
+    font-family : verdana,arial,helvetica;
+    font-size : 10pt;
+    color: #00F;
+}
+h1{
+    box-sizing:border-box;
+    background: rgb(70,103,158); /* Old browsers */
+    font-size: 13px;
+    color: #FFF;
+}
+
+.tform {
+    border-width: 1px;
+    border-color: #009;
+    border-style: solid;
+    background-image:url(file:///C|/xampp/htdocs/www/imagenes/Fondo3.PNG);
+}
+
+ul, ol, dl {
+    padding: 0;
+    margin: 0;
+}
+h3, h4, h5, h6, p {
+    margin-top: 0;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+a img {
+    border: none;
+}
+
+a:link {
+    color: #42413C;
+    text-decoration: underline;
+}
+a:visited {
+    color: #6E6C64;
+    text-decoration: underline;
+}
+a:hover, a:active, a:focus {
+    text-decoration: none;
+}
+
+.container {
+    width: 960px;
+    background: #FFF;
+    margin: 0 auto;
+}
+
+.header {
+    background: #FFF;
+}
+
+.sidebar1 {
+    float: left;
+    width: 150px;
+    background: #FFF;
+    padding-bottom: 10px;
+}
+.content {
+    overflow: hidden;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.content ul, .content ol {
+    padding: 0 15px 15px 40px;
+}
+
+ul.nav {
+    list-style: none;
+    border-top:  3px solid #666;
+    border-color: #03C;
+
+    margin-bottom: 5px;
+}
+ul.nav li {
+    border-right:  5px solid #666;
+    border-bottom: 1px solid #666;
+}
+ul.nav a, ul.nav a:visited {
+    padding: 5px 5px 5px 15px;
+    display: block;
+    width: 128px;
+    text-decoration: none;
+    background: #eaeaea;
+}
+ul.nav a:hover, ul.nav a:active, ul.nav a:focus {
+    background: cross-fade;
+    color: #FFF;
+}
+
+.footer {
+    padding: 10px 0;
+    text-decoration:blink;
+    background: #CCC;
+    position: relative;
+    clear: both;
+}
+
+.fltrt {
+    float: right;
+    margin-left: 8px;
+}
+.fltlft {
+    float: left;
+    margin-right: 8px;
+}
+.clearfloat {
+    clear:both;
+    height:0;
+    font-size: 1px;
+    line-height: 0px;
+}
+
+.s_table {
+    padding-top: 10px;
+    overflow: hidden;
+}
+
+/* NEW */
+
+.info {
+    text-align: center;
+    padding: 2px;
+    font-size: 11px;
+    color: #fff;
+    position: absolute;
+    display: none;
+    border-radius: 3px;
+}
+.error {
+    background: #f60000;
+    border: 3px solid #d50000;
+
+}
+
+.correct {
+    background: #56d800;
+    border: 3px solid #008000;
+}
+
+.wrong {
+    font-weight: bold;
+    color: #e90000;
+}
+
+.normal {
+    font-weight: normal;
+    color: #222;
+}
+
+#send {
+
+}
+
+#send:active {
+    text-indent: -10px;
+}
+
+.pmenu {
+    margin-bottom: 1px;
+}
+
+input:not([type=submit]):invalid:required {
+    background: url('../imagenes/asterisk.png') no-repeat right top;
+}
+
+input:not([type=submit]):valid:required {
+    background: #ffffff;
+}
+
+.inputfecha{
+    background: transparent url(../calendario/calendario.png) no-repeat right;
+}

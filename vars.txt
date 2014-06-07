@@ -1,0 +1,29 @@
+NOMBRES
+
+USUARIOS
+
+Primer nombre: nombre
+Apellido: apellido
+Cédula: cedula
+Nombre de usuario: username
+Contraseña: password
+Correo electrónico: email
+
+PERIODO
+
+Año: anio
+Tipo: tipo
+
+PASANTÍA
+
+Compañia: compania
+Email compañia: compania_email
+Departamento: departamento
+Dirección: direccion
+Dirigido a: dirigido_a
+Supervisor: supervisor
+Teléfono celular: telefono_celu
+Teléfono de oficina: telefono_ofic
+Tiempo completo: tiempo_completo
+Fecha de inicio: fecha_inicio
+Fecha de fin: fecha_fin

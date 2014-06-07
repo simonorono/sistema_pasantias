@@ -1,0 +1,104 @@
+BODY  {
+    font-family : verdana,arial,helvetica;
+    font-size : 10pt;
+    background-color : #ffffff;
+}
+
+TD  {
+    font-family : verdana,arial,helvetica;
+    font-size : 10pt;
+}
+
+INPUT  {
+    font-family : verdana,arial,helvetica;
+    font-size : 8pt;
+}
+
+TEXTAREA  {
+    font-family : verdana,arial,helvetica;
+    font-size : 8pt;
+}
+
+SELECT  {
+    font-family : verdana,arial,helvetica;
+    font-size : 8pt;
+}
+
+.tablacalendario{
+    width: 200px;
+}
+.tablacalendario TD {
+    font-family : verdana,arial,helvetica;
+    font-size : 10pt;
+    text-align: center;
+}
+.tablacalendario TD A{
+    text-decoration: none;
+}
+.diasemana  {
+    font-family : verdana,arial,helvetica;
+    font-size : 10pt;
+    color: #FFF;
+    background-color: #00F;
+    text-align: center;
+}
+.tit, .titmesano  {
+    font-family : verdana,arial,helvetica;
+    font-size : 10pt;
+    color: #FFF;
+    background-color: #00F;
+    font-weight: bold;
+}
+.titmesano{
+    text-align: center;
+}
+
+.messiguiente, .mesanterior{
+    font-size:10pt;
+    font-weight:bold;
+    color:white;
+}
+.mesanterior{
+    text-align: right;
+}
+.messiguiente a, .mesanterior a{
+    color:white;
+    text-decoration:none;
+}
+
+.hoy {
+    font-family : verdana,arial,helvetica;
+    font-size : 10pt;
+    color: #00C;
+    background-color: #aac;
+    font-weight: bold;
+}
+
+.domingo {
+    font-family : verdana,arial,helvetica;
+    font-size : 10pt;
+    color: #990000
+}
+
+.domingo a{
+    color: #990000;
+}
+
+.diario {
+    font-family : verdana,arial,helvetica;
+    font-size : 10pt;
+    color: #00F;
+}
+
+.tform {
+    border-width: 1px;
+    border-color: #000;
+    border-style: solid;
+}
+.inputfecha{
+    height: 24px;
+    background: transparent url(calendario.png) no-repeat right;
+    padding: 2px;
+    width: 100px;
+    font-size: 12px;
+}
