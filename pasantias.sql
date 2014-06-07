@@ -1,0 +1,73 @@
+
+-- CREATE DATABASE pasantias;
+
+CREATE TYPE tipo_periodo AS ENUM
+(
+    'primero',
+    'segundo',
+    'unico'
+);
+
+CREATE TYPE tipo_cuenta AS ENUM
+(
+    'estudiante',
+    'tutor_licom',
+    'dpe'
+);
+
+CREATE TABLE periodo
+(
+    id serial NOT NULL,
+    anio numeric (4,0) NOT NULL,
+    tipo tipo_periodo NOT NULL,
+    activo boolean NOT NULL,
+    PRIMARY KEY (id),
+    UNIQUE (anio,tipo)
+);
+
+CREATE TABLE usuario
+(
+    id serial NOT NULL,
+    username varchar(20) NOT NULL,
+    password char(128) NOT NULL,
+    nombre varchar(30),
+    apellido varchar(30),
+    cedula varchar(30),
+    email varchar(254),
+    tipo tipo_cuenta NOT NULL,
+    cod_carne char(11),
+    telefono_celu char(14),
+    telefono_habi char(14),
+    PRIMARY KEY (id),
+    UNIQUE (username),
+    UNIQUE (email),
+    UNIQUE (cod_carne)
+);
+
+CREATE INDEX ON usuario USING btree (username);
+CREATE INDEX ON usuario USING btree (cedula);
+CREATE INDEX ON usuario USING btree (email);
+
+CREATE TABLE pasantia
+(
+    id serial NOT NULL,
+    usuario_id int REFERENCES usuario (id) NOT NULL,
+    periodo_id int REFERENCES periodo (id) NOT NULL,
+    compania text NOT NULL,
+    email varchar(254) NOT NULL,
+    departamento text NOT NULL,
+    direccion text NOT NULL,
+    dirigido_a text NOT NULL,
+    actividad text NOT NULL,
+    actividades text NOT NULL,
+    supervisor text NOT NULL,
+    cargo_supervisor text NOT NULL,
+    horario text NOT NULL,
+    telefono_celu char(14) NOT NULL,
+    telefono_ofic char(14) NOT NULL,
+    tiempo_completo boolean NOT NULL,
+    fecha_inicio timestamp without time zone NOT NULL,
+    fecha_fin timestamp without time zone NOT NULL,
+    PRIMARY KEY (id),
+    UNIQUE (usuario_id, periodo_id)
+);
