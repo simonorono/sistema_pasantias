@@ -32,8 +32,17 @@ for (i = 0; i < elements.length; i++) {
                 case 'cedula':
                     e.target.setCustomValidity('Ingrese su cédula.');
                     break;
+                case 'cod_carne':
+                    e.target.setCustomValidity('Ingrese el código de su carné.');
+                    break;
                 case 'anio':
                     e.target.setCustomValidity('Debe ingresar un año.');
+                    break;
+                case 'telefono_celu':
+                    e.target.setCustomValidity('Debe ingresar su teléfono celular.');
+                    break;
+                case 'telefono_habi':
+                    e.target.setCustomValidity('Debe ingresar su teléfono de habitación.');
                     break;
                 default:
                     e.target.setCustomValidity('');
@@ -47,6 +56,9 @@ for (i = 0; i < elements.length; i++) {
                     break;
                 case 'password':
                     e.target.setCustomValidity('Debe tener 6 caracteres mínimos.');
+                    break;
+                case 'cod_carne':
+                    e.target.setCustomValidity('El código de carné tiene 11 digitos.');
                     break;
                 case 'anio':
                     e.target.setCustomValidity('Debe ingresar un año entre el 2000 y el 2999.');

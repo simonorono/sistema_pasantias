@@ -40,7 +40,7 @@ $periodo = pg_fetch_row($periodo, 0)[0];
 
                 <?php } else if ($count == 0) { ?>
 
-                <h1 align="center">Registro</h1>
+                <h1 align="center">Registro de pasantias</h1>
                 <table align="center">
                     <tr>
                         <td>
@@ -55,7 +55,7 @@ $periodo = pg_fetch_row($periodo, 0)[0];
                                 </p>
                                 <p>
                                     <label for="direccion">Dirección</label>
-                                    <input type="text" name="direccion" id="direccion" required/>
+                                    <textarea name="direccion" id="direccion" required></textarea>
                                 </p>
                                 <p>
                                     <label for="dirigido_a">Dirigido a</label>
@@ -64,6 +64,14 @@ $periodo = pg_fetch_row($periodo, 0)[0];
                                 <p>
                                     <label for="supervisor">Supervisor</label>
                                     <input type="text" name="supervisor" id="supervisor" required/>
+                                </p>
+                                <p>
+                                    <label for="actividad">Actividad</label>
+                                    <input type="text" name="actividad" id="actividad" required/>
+                                </p>
+                                <p>
+                                    <label for="actividades">Actividades</label>
+                                    <textarea name="actividades" id="actividades" required></textarea>
                                 </p>
                                 <p>
                                     <label for="telefono_celu">Teléfono celular</label>

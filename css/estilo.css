@@ -18,11 +18,15 @@ INPUT  {
     border-radius: 3px;
     font-family : verdana,arial,helvetica;
     font-size : 10pt;
+    vertical-align: top;
 }
 
 TEXTAREA  {
+    border-width: thin;
+    border-radius: 3px;
     font-family : verdana,arial,helvetica;
-    font-size : 8pt;
+    font-size : 10pt;
+    vertical-align: top;
 }
 
 SELECT  {
@@ -61,6 +65,7 @@ label {
     display: inline-block;
     font-size: 10pt;
     width: 140px;
+    vertical-align: top;
 }
 
 .diario {
@@ -233,6 +238,14 @@ input:not([type=submit]):invalid:required {
 }
 
 input:not([type=submit]):valid:required {
+    background: #ffffff;
+}
+
+textarea:invalid:required {
+    background: url('../imagenes/asterisk.png') no-repeat right top;
+}
+
+textarea:valid:required {
     background: #ffffff;
 }
 

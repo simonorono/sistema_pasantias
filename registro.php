@@ -39,8 +39,20 @@
                                     <input type="text" name="apellido" id="apellido" required/>
                                 </p>
                                 <p>
+                                    <label for="telefono_celu">Telefóno celular</label>
+                                    <input type="text" name="telefono_celu" id="telefono_celu" required/>
+                                </p>
+                                <p>
+                                    <label for="telefono_habi">Telefóno de habitación</label>
+                                    <input type="text" name="telefono_habi" id="telefono_habi" required/>
+                                </p>
+                                <p>
                                     <label for="cedula">Cédula</label>
                                     <input type="text" name="cedula" id="cedula" required>
+                                </p>
+                                <p>
+                                    <label for="cod_carne">Código de carné</label>
+                                    <input type="text" name="cod_carne" id="cod_carne" required pattern="^\d{11,11}$">
                                 </p>
                                 <p align="center">
                                     <input type="submit" value="Registrarse" name="send" id="send"/>

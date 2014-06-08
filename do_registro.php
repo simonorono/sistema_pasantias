@@ -28,7 +28,10 @@ if (!(isset($username) &&
       isset($email) &&
       isset($nombre) &&
       isset($apellido) &&
-      isset($cedula)))
+      isset($cedula) &&
+      isset($telefono_celu) &&
+      isset($telefono_habi) &&
+      isset($cod_carne)))
     die("Missing parameters.");
 
 if (strlen($username) < 6) $error = 1;
@@ -39,6 +42,9 @@ if (strlen($apellido) == 0) $error = 5;
 if (strlen($cedula) == 0) $error = 6;
 if (check_username($username) == 1) $error = 7;
 if (check_email($email) == 1) $error = 8;
+if (strlen($cod_carne) != 11) $error = 9;
+if (strlen($telefono_celu) == 0) $error = 10;
+if (strlen($telefono_habi) == 0) $error = 11;
 
 if (isset($error)) {
     die($error_registro[$error]);

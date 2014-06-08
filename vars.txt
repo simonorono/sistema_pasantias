@@ -1,4 +1,6 @@
-NOMBRES
+______________________
+|NOMBRES DE VARIABLES|
+¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
 
 USUARIOS
 
@@ -8,11 +10,15 @@ Cédula: cedula
 Nombre de usuario: username
 Contraseña: password
 Correo electrónico: email
+Código de carné: cod_carne
+Teléfono celular: telefono_celu
+Teléfono de oficina: telefono_ofic
 
 PERIODO
 
 Año: anio
 Tipo: tipo
+Activo: activo
 
 PASANTÍA
 
@@ -21,7 +27,11 @@ Email compañia: compania_email
 Departamento: departamento
 Dirección: direccion
 Dirigido a: dirigido_a
+Actividad: actividad
+Actividades: actividades
 Supervisor: supervisor
+Cargo de supervisor: cargo_supervisor
+Horario: horario
 Teléfono celular: telefono_celu
 Teléfono de oficina: telefono_ofic
 Tiempo completo: tiempo_completo
