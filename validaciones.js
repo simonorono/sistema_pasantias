@@ -71,6 +71,90 @@ for (i = 0; i < elements.length; i++) {
     };
 
     elements[i].oninput = function (e) {
-        e.target.setCustomValidity('');
+        if (e.target.validity.patternMismatch) {
+            switch (e.target.id) {
+                case 'username':
+                    e.target.setCustomValidity('Debe tener de 6 a 20 caracteres.');
+                    break;
+                case 'password':
+                    e.target.setCustomValidity('Debe tener 6 caracteres mínimos.');
+                    break;
+                case 'cod_carne':
+                    e.target.setCustomValidity('El código de carné tiene 11 digitos.');
+                    break;
+                case 'anio':
+                    e.target.setCustomValidity('Debe ingresar un año entre el 2000 y el 2999.');
+                    break;
+                default:
+                    e.target.setCustomValidity('');
+                    break;
+            }
+        } else {
+            e.target.setCustomValidity('');
+        }
     };
 }
+
+
+/**********AJAX*************/
+
+$(document).ready(function () {
+    var jVal = {
+        'username' : function () {
+            $('body').append('<div id="userInfo" class="info"></div>');
+            var userInfo = $('#userInfo');
+            var ele = $('#username');
+            var pos = ele.offset();
+            userInfo.css({
+                top: pos.top - 3,
+                left: pos.left + ele.width() + 15
+            });
+            if (ele.val().length < 6) {
+                userInfo.removeClass('ajax');
+            } else {
+                var username = ele;
+                var dataString = 'username=' + username;
+                $.ajax({
+                    type: "POST",
+                    url: "existe_usuario.php",
+                    data: dataString,
+                    success: function (data) {
+                        userInfo.removeClass('error').addClass('ajax').html(data).show();
+
+                    }
+                });
+            }
+        },
+        'email' : function () {
+            $('body').append('<div id="emailInfo" class="info"></div>');
+            var emailInfo = $('#emailInfo');
+            var ele = $('#email');
+            var pos = ele.offset();
+            emailInfo.css({
+                top: pos.top - 3,
+                left: pos.left + ele.width() + 15
+            });
+            var patt = /^.+@.+[.].{2,}$/i;
+
+            if(!patt.test(ele.val())) {
+                emailInfo.removeClass('ajax');
+            }
+            else {
+                var email = ele;
+                var dataString = 'email='+email;
+                $.ajax({
+                    type: "POST",
+                    url: "existe_email.php",
+                    data: dataString,
+                    success: function(data) {
+                        emailInfo.removeClass('error').addClass('ajax').html(data).show();
+                    }
+                });
+            }
+        },
+
+    };
+
+    $('#username').change(jVal.username);
+    $('#email').change(jVal.email);
+});

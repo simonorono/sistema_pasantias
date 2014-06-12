@@ -44,7 +44,7 @@ $periodo = pg_fetch_row($periodo, 0)[0];
                 <table align="center">
                     <tr>
                         <td>
-                            <form method="post" name="rp" action="do_registro.php" id="jform">
+                            <form method="post" name="rp" action="do_registrar_pasantia.php" id="jform">
                                 <p>
                                     <label for="compania">Nombre de la compañia</label>
                                     <input type="text" name="compania" id="compania" required/>
@@ -52,6 +52,10 @@ $periodo = pg_fetch_row($periodo, 0)[0];
                                 <p>
                                     <label for="compania_email">Correo de la compañia</label>
                                     <input type="text" name="compania_email" id="compania_email" required/>
+                                </p>
+                                <p>
+                                    <label for="departamento">Departamento</label>
+                                    <input type="text" name="departamento" id="departamento" required/>
                                 </p>
                                 <p>
                                     <label for="direccion">Dirección</label>
@@ -66,12 +70,20 @@ $periodo = pg_fetch_row($periodo, 0)[0];
                                     <input type="text" name="supervisor" id="supervisor" required/>
                                 </p>
                                 <p>
+                                    <label for="cargo_supervisor">Cargo del supervisor</label>
+                                    <input type="text" name="cargo_supervisor" id="cargo_supervisor" required/>
+                                </p>
+                                <p>
                                     <label for="actividad">Actividad</label>
                                     <input type="text" name="actividad" id="actividad" required/>
                                 </p>
                                 <p>
                                     <label for="actividades">Actividades</label>
                                     <textarea name="actividades" id="actividades" required></textarea>
+                                </p>
+                                <p>
+                                    <label for="horario">Horario</label>
+                                    <input name="horario" id="horario" required></textarea>
                                 </p>
                                 <p>
                                     <label for="telefono_celu">Teléfono celular</label>
@@ -91,7 +103,7 @@ $periodo = pg_fetch_row($periodo, 0)[0];
                                 </p>
                                 <p>
                                     <label for="tiempo_completo">Tiempo Completo</label>
-                                    <input type="checkbox" id="tiempo_completo" name="tiempo_completo"/>
+                                    <input type="checkbox" value="y" checked id="tiempo_completo" name="tiempo_completo"/>
                                 </p>
                                 <p>
                                     <input type="submit" value="Registrar">

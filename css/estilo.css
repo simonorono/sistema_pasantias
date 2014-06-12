@@ -216,6 +216,12 @@ ul.nav a:hover, ul.nav a:active, ul.nav a:focus {
     color: #e90000;
 }
 
+.ajax{
+    background: #999;
+    border: 3px solid #CCC;
+
+}
+
 .normal {
     font-weight: normal;
     color: #222;

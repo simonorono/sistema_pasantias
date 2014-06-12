@@ -68,6 +68,9 @@ CREATE TABLE pasantia
     tiempo_completo boolean NOT NULL,
     fecha_inicio timestamp without time zone NOT NULL,
     fecha_fin timestamp without time zone NOT NULL,
+
+    m01_registrada timestamp without time zone,
+
     PRIMARY KEY (id),
     UNIQUE (usuario_id, periodo_id)
 );
