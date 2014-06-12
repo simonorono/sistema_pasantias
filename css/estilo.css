@@ -3,7 +3,7 @@ BODY  {
     font-family : verdana,arial,helvetica;
     font-size : 10pt;
 }
-
+/*
 td  {
     font-family : verdana,arial,helvetica;
     font-size : 10pt;
@@ -12,7 +12,7 @@ tr{
     border-color:#666;
     border-style:ridge;
     border-spacing:10px;
-}
+}*/
 INPUT  {
     border-width: thin;
     border-radius: 3px;
@@ -61,6 +61,21 @@ SELECT  {
     font-size : 10pt;
     color: #42413C;
 }
+
+.periodo_td {
+    padding-top: 10px;
+    padding-right: 15px;
+    font-family : verdana,arial,helvetica;
+    font-size: 10pt;
+}
+
+.periodo_tr {
+    border-color: #000000;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    border-collapse: collapse;
+}
+
 label {
     display: inline-block;
     font-size: 10pt;

@@ -51,8 +51,8 @@ CREATE INDEX ON usuario USING btree (email);
 CREATE TABLE pasantia
 (
     id serial NOT NULL,
-    usuario_id int REFERENCES usuario (id) NOT NULL,
-    periodo_id int REFERENCES periodo (id) NOT NULL,
+    usuario_id int REFERENCES usuario (id) ON UPDATE CASCADE ON DELETE CASCADE,
+    periodo_id int REFERENCES periodo (id) ON UPDATE CASCADE ON DELETE CASCADE,
     compania text NOT NULL,
     email varchar(254) NOT NULL,
     departamento text NOT NULL,
@@ -70,6 +70,11 @@ CREATE TABLE pasantia
     fecha_fin timestamp without time zone NOT NULL,
 
     m01_registrada timestamp without time zone,
+    m02 timestamp without time zone,
+    m04 timestamp without time zone,
+    m05 timestamp without time zone,
+    m06 timestamp without time zone,
+    m07 timestamp without time zone,
 
     PRIMARY KEY (id),
     UNIQUE (usuario_id, periodo_id)
