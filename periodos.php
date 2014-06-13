@@ -6,7 +6,7 @@ require_once ('db.php');
 validate_session ('tutor_licom');
 
 $db = new PgDB();
-$result = $db->query ("SELECT id, anio, tipo, activo FROM periodo ORDER BY periodo.anio");
+$result = $db->query ("SELECT id, anio, tipo, activo FROM periodo ORDER BY periodo.anio, periodo.tipo");
 
 ?>
 
@@ -21,7 +21,7 @@ $result = $db->query ("SELECT id, anio, tipo, activo FROM periodo ORDER BY perio
             <div class="header">
                 <?php require_once("include/cabecera.php"); ?>
             </div>
-            <?php require_once("include/menu_general.php"); ?>
+            <?php require_once("include/menu_licom.php"); ?>
             <div class="content">
                 <?php require_once("include/fecha.php"); ?>
                 <div align="center">

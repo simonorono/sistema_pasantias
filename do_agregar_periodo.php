@@ -11,7 +11,6 @@ if (isset ($_GET['op']) && isset ($_GET['id'])) {
     if ($_GET['op'] == 'del') {
         $qry = 'DELETE FROM periodo WHERE periodo.id = ' . $_GET['id'];
         $db->query ($qry);
-        die();
         header ('Location: periodos.php');
     }
     if ($_GET['op'] == 'act') {

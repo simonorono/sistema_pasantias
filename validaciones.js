@@ -112,15 +112,13 @@ $(document).ready(function () {
             if (ele.val().length < 6) {
                 userInfo.removeClass('ajax');
             } else {
-                var username = ele;
-                var dataString = 'username=' + username;
+                var dataString = 'username=' + $('#username').val();
                 $.ajax({
                     type: "POST",
                     url: "existe_usuario.php",
                     data: dataString,
                     success: function (data) {
                         userInfo.removeClass('error').addClass('ajax').html(data).show();
-
                     }
                 });
             }
@@ -136,23 +134,22 @@ $(document).ready(function () {
             });
             var patt = /^.+@.+[.].{2,}$/i;
 
-            if(!patt.test(ele.val())) {
+            if (!patt.test(ele.val())) {
                 emailInfo.removeClass('ajax');
-            }
-            else {
+            } else {
                 var email = ele;
-                var dataString = 'email='+email;
+                var dataString = 'email=' + $('#email').val();
                 $.ajax({
                     type: "POST",
                     url: "existe_email.php",
                     data: dataString,
-                    success: function(data) {
+                    success: function (data) {
                         emailInfo.removeClass('error').addClass('ajax').html(data).show();
+
                     }
                 });
             }
-        },
-
+        }
     };
 
     $('#username').change(jVal.username);

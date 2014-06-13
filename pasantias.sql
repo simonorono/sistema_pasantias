@@ -70,11 +70,14 @@ CREATE TABLE pasantia
     fecha_fin timestamp without time zone NOT NULL,
 
     m01_registrada timestamp without time zone,
-    m02 timestamp without time zone,
-    m04 timestamp without time zone,
-    m05 timestamp without time zone,
-    m06 timestamp without time zone,
-    m07 timestamp without time zone,
+    m02_aceptada timestamp without time zone,
+    m04_numero_asignado timestamp without time zone,
+    m05_sellada timestamp without time zone,
+    m06_entrego_copia timestamp without time zone,
+    m07_entrego_borrador timestamp without time zone,
+    m08_retiro_borrador timestamp without time zone,
+    m09_entrega_final timestamp without time zone,
+    m10_carga_nota timestamp without time zone,
 
     PRIMARY KEY (id),
     UNIQUE (usuario_id, periodo_id)
