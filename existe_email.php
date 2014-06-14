@@ -1,5 +1,6 @@
 
 <?php
+
 include('db.php');
 $db = new PgDB();
 if($_POST) {
@@ -13,4 +14,5 @@ if($_POST) {
         echo 'Disponible';
     }
 }
+
 ?>

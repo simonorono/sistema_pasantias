@@ -84,46 +84,46 @@ $periodo = pg_fetch_row($periodo, 0)[0];
                                 <p>
                                     <label for="horario">Horario</label>
                                     <input name="horario" id="horario" required></textarea>
-                                </p>
-                                <p>
-                                    <label for="telefono_celu">Teléfono celular</label>
-                                    <input type="text" name="telefono_celu" id="telefono_celu" required/>
-                                </p>
-                                <p>
-                                    <label for="telefono_ofic">Teléfono de oficina</label>
-                                    <input type="text" name="telefono_ofic" id="telefono_ofic" required/>
-                                </p>
-                                <p>
-                                    <label for="fecha_inicio">Fecha de inicio</label>
-                                    <?php escribe_formulario_fecha_vacio('fecha_inicio', 'rp'); ?>
-                                </p>
-                                <p>
-                                    <label for="fecha_fin">Fecha de finalización</label>
-                                    <?php escribe_formulario_fecha_vacio('fecha_fin', 'rp'); ?>
-                                </p>
-                                <p>
-                                    <label for="tiempo_completo">Tiempo Completo</label>
-                                    <input type="checkbox" value="y" checked id="tiempo_completo" name="tiempo_completo"/>
-                                </p>
-                                <p>
-                                    <input type="submit" value="Registrar">
-                                </p>
-                            </form>
-                            <script type="application/javascript" src="validacion_registro.js"></script>
-                        </td>
-                    </tr>
-                </table>
+                    </p>
+                    <p>
+                        <label for="telefono_celu">Teléfono celular</label>
+                        <input type="text" name="telefono_celu" id="telefono_celu" required/>
+                    </p>
+                    <p>
+                        <label for="telefono_ofic">Teléfono de oficina</label>
+                        <input type="text" name="telefono_ofic" id="telefono_ofic" required/>
+                    </p>
+                    <p>
+                        <label for="fecha_inicio">Fecha de inicio</label>
+                        <?php escribe_formulario_fecha_vacio('fecha_inicio', 'rp'); ?>
+                    </p>
+                    <p>
+                        <label for="fecha_fin">Fecha de finalización</label>
+                        <?php escribe_formulario_fecha_vacio('fecha_fin', 'rp'); ?>
+                    </p>
+                    <p>
+                        <label for="tiempo_completo">Tiempo Completo</label>
+                        <input type="checkbox" value="y" checked id="tiempo_completo" name="tiempo_completo"/>
+                    </p>
+                    <p>
+                        <input type="submit" value="Registrar">
+                    </p>
+                    </form>
+                <script type="application/javascript" src="validacion_registro.js"></script>
+                </td>
+            </tr>
+        </table>
 
-                <?php } else { ?>
+    <?php } else { ?>
 
-                <div align="center">
-                    <h2>No puede registrar más de una pasantia.</h2>
-                </div>
+    <div align="center">
+        <h2>No puede registrar más de una pasantia.</h2>
+    </div>
 
-                <?php } ?>
+    <?php } ?>
 
-            </div>
-            <?php require_once("include/pie.php"); ?>
-        </div>
-    </body>
+    </div>
+<?php require_once("include/pie.php"); ?>
+</div>
+</body>
 </html>
