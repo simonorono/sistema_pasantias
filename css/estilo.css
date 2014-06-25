@@ -64,7 +64,8 @@ SELECT  {
 
 .periodo_td {
     padding-top: 10px;
-    padding-right: 15px;
+    padding-left: 20px;
+    padding-right: 20px;
     font-family : verdana,arial,helvetica;
     font-size: 10pt;
 }

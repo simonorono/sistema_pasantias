@@ -8,7 +8,7 @@
                 <p class="pmenu"><a href="index.php">Inicio</a></p>
                 <p class="pmenu"><a href="agregar_periodo.php">Agregar periodo</a></p>
                 <p class="pmenu"><a href="periodos.php">Administrar periodos</a></p>
-                <p class="pmenu"><a href="validar.php">Validar pasantias</a></p>
+                <p class="pmenu"><a href="pasantias.php">Pasantias</a></p>
                 <p class="pmenu"><a href="logout.php">Salir</a></p>
             </div>
         </div>
