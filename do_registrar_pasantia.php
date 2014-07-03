@@ -42,9 +42,11 @@ if (strlen ($telefono_ofic) == 0) $error = 10;
 if (strlen ($fecha_inicio) == 0) $error = 11;
 if (strlen ($fecha_fin) == 0) $error = 12;
 
+var_dump($fecha_inicio);
 $fecha_inicio = date_format (DateTime::createFromFormat('d/m/Y', $fecha_inicio), 'Y-m-d');
 $fecha_fin = date_format (DateTime::createFromFormat('d/m/Y', $fecha_fin), 'Y-m-d');
 $today = date ('Y-m-d', time());
+die();
 
 if (isset ($error)) {
     var_dump($error);
@@ -59,7 +61,7 @@ else {
     $result = $db->query($qry);
     $periodo_id = pg_fetch_row ($result, 0)[0];
 
-    $qry = "INSERT INTO pasantia (usuario_id, periodo_id, compania, email, departamento, direccion, dirigido_a, supervisor, cargo_supervisor, actividad, actividades, horario, telefono_celu, telefono_ofic, fecha_inicio, fecha_fin, tiempo_completo, m01_registrada) VALUES ($usuario_id, $periodo_id, '$compania', '$compania_email', '$departamento', '$direccion', '$dirigido_a', '$supervisor', '$cargo_supervisor', '$actividad', '$actividades', '$horario', '$telefono_celu', '$telefono_ofic', '$fecha_inicio', '$fecha_fin', $tiempo_completo, '$today')";
+    $qry = "INSERT INTO pasantia (usuario_id, periodo_id, compania, email, departamento, direccion, dirigido_a, supervisor, cargo_supervisor, actividad, actividades, horario, telefono_celu, telefono_ofic, fecha_inicio, fecha_fin, tiempo_completo, m01_registrada, valida) VALUES ($usuario_id, $periodo_id, '$compania', '$compania_email', '$departamento', '$direccion', '$dirigido_a', '$supervisor', '$cargo_supervisor', '$actividad', '$actividades', '$horario', '$telefono_celu', '$telefono_ofic', '$fecha_inicio', '$fecha_fin', $tiempo_completo, '$today', false)";
 
     $db->query($qry);
 }

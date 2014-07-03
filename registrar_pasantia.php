@@ -8,7 +8,10 @@ require_once('calendario/calendario.php');
 
 $db = new PgDB();
 
-$count = $db->query('SELECT count(*) FROM usuario INNER JOIN pasantia ON usuario.id = pasantia.usuario_id');
+$username = session_var('username');
+
+$qry = "SELECT count(*) FROM usuario INNER JOIN pasantia ON usuario.id = pasantia.usuario_id AND usuario.username = '$username' INNER JOIN periodo ON pasantia.periodo_id = periodo.id AND periodo.activo = true";
+$count = $db->query($qry);
 $count = pg_fetch_row($count, 0)[0];
 
 $periodo = $db->query('SELECT count(*) FROM periodo WHERE periodo.activo = TRUE');
