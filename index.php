@@ -6,11 +6,16 @@ if (session_status() == PHP_SESSION_ACTIVE) extract($_SESSION);
 
 if(isset($tipo_cuenta) &&
    isset($username)) {
-    if($tipo_cuenta === 'tutor_licom')
+    if($tipo_cuenta == 'tutor_licom') {
         header('Location: licom.php');
-    else if($tipo_cuenta === 'estudiante')
+    }
+    else if($tipo_cuenta == 'estudiante') {
         header('Location: main.php');
-};
+    }
+    else if($tipo_cuenta == 'dpe') {
+        header('Location: dpe.php');
+    }
+}
 
 ?>
 

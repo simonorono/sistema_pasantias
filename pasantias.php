@@ -2,21 +2,22 @@
 
 require_once('globals.php');
 require_once('db.php');
-validate_session('tutor_licom');
+
+validate_session2('tutor_licom', 'dpe');
 
 $db = new PgDB();
 
 $periodo = $db->query('SELECT id FROM periodo WHERE periodo.activo = TRUE');
+$tipo_cuenta = session_var('tipo_cuenta');
 
 if (pg_num_rows($periodo) == 0) $error = 'periodo';
 else {
     $periodo = pg_fetch_row($periodo, 0)[0];
 
-    $qry = <<<"QRY"
-        SELECT usuario.cedula, usuario.nombre, usuario.apellido, pasantia.id
-        FROM pasantia INNER JOIN usuario ON usuario.id = pasantia.usuario_id
-        AND pasantia.periodo_id = $periodo
-QRY;
+    $qry = "SELECT usuario.cedula, usuario.nombre, usuario.apellido, pasantia.id FROM pasantia INNER JOIN usuario ON usuario.id = pasantia.usuario_id AND pasantia.periodo_id = $periodo";
+
+    if ($tipo_cuenta == 'dpe') $qry = $qry . "AND pasantia.valida = TRUE";
+
     $pasantias = $db->query($qry);
     if (pg_num_rows($pasantias) == 0) $error = 'pasantia';
 }
@@ -34,7 +35,14 @@ QRY;
             <div class="header">
                 <?php include( "include/cabecera.php"); ?>
             </div>
-            <?php require_once( "include/menu_licom.php"); ?>
+            <?php
+if ($tipo_cuenta == 'dpe') {
+    require_once("include/menu_dpe.php");
+}
+else {
+    require_once("include/menu_licom.php");
+}
+            ?>
             <div class="content">
                 <?php require_once( "include/fecha.php"); ?>
                 <div align="center">

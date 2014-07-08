@@ -37,3 +37,6 @@ Teléfono de oficina: telefono_ofic
 Tiempo completo: tiempo_completo
 Fecha de inicio: fecha_inicio
 Fecha de fin: fecha_fin
+Numero de carta: numero_carta
+Aprobada: aprobada
+Valida: valida

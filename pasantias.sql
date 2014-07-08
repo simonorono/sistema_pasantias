@@ -96,6 +96,10 @@ CREATE TABLE pasantia
     m08_entrega_final timestamp without time zone,
     m09_carga_nota timestamp without time zone,
 
+    numero_carta char(3),
+    aprobada boolean,
+    valida boolean,
+
     PRIMARY KEY (id),
     UNIQUE (usuario_id, periodo_id)
 );
@@ -127,3 +131,6 @@ COMMENT ON COLUMN pasantia.m06_entrego_borrador IS 'Fecha de entrega del borrado
 COMMENT ON COLUMN pasantia.m07_retiro_borrador IS 'Fecha de retiro del borrador';
 COMMENT ON COLUMN pasantia.m08_entrega_final IS 'Fecha de entrega final';
 COMMENT ON COLUMN pasantia.m09_carga_nota IS 'Fecha de la carga de la nota';
+COMMENT ON COLUMN pasantia.numero_carta IS 'El número de carta';
+COMMENT ON COLUMN pasantia.aprobada IS 'Resultado final de la pasantía';
+COMMENT ON COLUMN pasantia.valida IS '¿Es valida la pasantía?';

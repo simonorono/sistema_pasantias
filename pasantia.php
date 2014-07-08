@@ -3,13 +3,16 @@
 require_once ('globals.php');
 require_once ('db.php');
 
-validate_session('tutor_licom');
+validate_session2('tutor_licom', 'dpe');
+
+$tipo_cuenta = session_var('tipo_cuenta');
 
 $db = new PgDB();
 
 if (isset($_GET['validar'])) {
     $id = $_GET['validar'];
-    $qry = "UPDATE pasantia SET valida = TRUE WHERE pasantia.id = $id";
+    $today = date ('Y-m-d', time());
+    $qry = "UPDATE pasantia SET valida = TRUE, m02_aceptada = '$today' WHERE pasantia.id = $id";
     $db->query($qry);
     header ("Location: pasantias.php");
 }
@@ -24,32 +27,13 @@ if (isset($_GET['eliminar'])) {
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
     $headers = ['Compañia', 'Email', 'Departamento', 'Dirección', 'Dirigido a', 'Actividad', 'Actividades', 'Supervisor', 'Cargo del supervisor', 'Horario', 'Teléfono celular', 'Teléfono de oficina', 'Tiempo completo', 'Fecha de inicio', 'Fecha de fin'];
-    $qry = <<<"STR"
-        SELECT
-            compania,
-            email,
-            departamento,
-            direccion,
-            dirigido_a,
-            actividad,
-            actividades,
-            supervisor,
-            cargo_supervisor,
-            horario,
-            telefono_celu,
-            telefono_ofic,
-            tiempo_completo,
-            fecha_inicio,
-            fecha_fin
-        FROM
-            pasantia
-        WHERE
-            pasantia.id = $id;
-STR;
+
+    $qry = "SELECT compania, email, departamento, direccion, dirigido_a, actividad, actividades, supervisor, cargo_supervisor, horario, telefono_celu, telefono_ofic, tiempo_completo, fecha_inicio, fecha_fin FROM pasantia WHERE pasantia.id = $id";
+
     $result = $db->query($qry);
 }
 else {
-    die();
+    die('Missing parameters.');
 }
 
 ?>
@@ -65,7 +49,14 @@ else {
             <div class="header">
                 <?php include( "include/cabecera.php"); ?>
             </div>
-            <?php require_once( "include/menu_licom.php"); ?>
+            <?php
+if ($tipo_cuenta == 'dpe') {
+    require_once("include/menu_dpe.php");
+}
+else {
+    require_once("include/menu_licom.php");
+}
+            ?>
             <div class="content">
                 <?php require_once( "include/fecha.php"); ?>
                 <div align="center">
@@ -90,8 +81,20 @@ if (pg_num_rows($result) != 0) {
                             <td>
                                 <br/>
                                 <br/>
-                                <p><a href="pasantia.php?validar=<?php echo $_GET['id'] ?>">Validar</a>  -
-                                <a style="paddig-left: 2px" href="pasantia.php?eliminar=<?php echo $_GET['id'] ?>">Eliminar</a></p>
+                                <p>
+                                    <?php
+    if ($tipo_cuenta == 'dpe') {
+                                    ?>
+                                    <a href="numero_carta.php?id=<?php echo $_GET['id'] ?>">Asignar número de carta</a>
+                                    <?php
+    } else {
+                                    ?>
+                                    <a href="pasantia.php?validar=<?php echo $_GET['id'] ?>">Validar</a>  -
+                                    <a style="paddig-left: 2px" href="pasantia.php?eliminar=<?php echo $_GET['id'] ?>">Eliminar</a>
+                                    <?php
+    }
+                                    ?>
+                                </p>
                             </td>
                         </tr>
                     </table>

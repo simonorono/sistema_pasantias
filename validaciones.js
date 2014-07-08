@@ -38,6 +38,9 @@ for (i = 0; i < elements.length; i++) {
                 case 'anio':
                     e.target.setCustomValidity('Debe ingresar un año.');
                     break;
+                case 'numero_carta':
+                    e.target.setCustomValidity('Debe ingresar un número de carta.');
+                    break;
                 case 'telefono_celu':
                     e.target.setCustomValidity('Debe ingresar su teléfono celular.');
                     break;
@@ -63,6 +66,9 @@ for (i = 0; i < elements.length; i++) {
                 case 'anio':
                     e.target.setCustomValidity('Debe ingresar un año entre el 2000 y el 2999.');
                     break;
+                case 'numero_carta':
+                    e.target.setCustomValidity('Debe ingresar un código alfanumérico de tres carácteres.');
+                    break;
                 default:
                     e.target.setCustomValidity('');
                     break;
@@ -84,6 +90,9 @@ for (i = 0; i < elements.length; i++) {
                     break;
                 case 'anio':
                     e.target.setCustomValidity('Debe ingresar un año entre el 2000 y el 2999.');
+                    break;
+                case 'numero_carta':
+                    e.target.setCustomValidity('Debe ingresar un código alfanumérico de tres carácteres.');
                     break;
                 default:
                     e.target.setCustomValidity('');

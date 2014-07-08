@@ -2,7 +2,9 @@
 
 require_once ("db.php");
 require_once ("error.php");
+
 header ('Content-Type: text/html; charset=utf-8');
+
 function check_username ($var) {
     $db = new PgDB ();
     $qry = "SELECT 1 FROM usuario WHERE usuario.username = '$var'";
@@ -55,7 +57,7 @@ else {
 
     $db = new PgDB();
 
-    $qry = "INSERT INTO usuario (username, password, email, nombre, apellido, cedula, tipo) VALUES ('$username', '$hash_passwd', '$email', '$nombre', '$apellido', '$cedula', 'estudiante')";
+    $qry = "INSERT INTO usuario (username, password, email, nombre, apellido, cedula, tipo, cod_carne, telefono_celu, telefono_habi) VALUES ('$username', '$hash_passwd', '$email', '$nombre', '$apellido', '$cedula', 'estudiante', '$cedula', '$telefono_celu', '$telefono_habi')";
 
     $db->query($qry);
     header('Location: index.php');

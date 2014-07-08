@@ -46,7 +46,6 @@ var_dump($fecha_inicio);
 $fecha_inicio = date_format (DateTime::createFromFormat('d/m/Y', $fecha_inicio), 'Y-m-d');
 $fecha_fin = date_format (DateTime::createFromFormat('d/m/Y', $fecha_fin), 'Y-m-d');
 $today = date ('Y-m-d', time());
-die();
 
 if (isset ($error)) {
     var_dump($error);
