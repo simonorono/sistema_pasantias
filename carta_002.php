@@ -22,7 +22,7 @@ validate_session('estudiante');
                 <?php require_once("include/fecha.php"); ?>
                 <div align="center">
 
-                    <h2>Presione <a href="imp/formato_dpe_pas_001.php">aquí</a> para descargar su carta de postulación.</h2>
+                    <h2>Presione <a href="imp/formato_dpe_pas_002.php">aquí</a> para descargar su carta de registro.</h2>
 
                 </div>
             </div>

@@ -8,6 +8,7 @@
                 <p class="pmenu"><a href="index.php">Inicio</a></p>
                 <p class="pmenu"><a href="registrar_pasantia.php">Registrar pasantia</a></p>
                 <p class="pmenu"><a href="carta_001.php">Carta de postulación</a></p>
+                <p class="pmenu"><a href="carta_002.php">Carta de registro</a></p>
                 <p class="pmenu"><a href="logout.php">Salir</a></p>
             </div>
         </div>
