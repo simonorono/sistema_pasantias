@@ -25,7 +25,7 @@ $result = $db->query ("SELECT id, anio, tipo, activo FROM periodo ORDER BY perio
             <div class="content">
                 <?php require_once("include/fecha.php"); ?>
                 <div align="center">
-                    <h1>Inicio de sesión</h1>
+                    <h1>Administrar periodos.</h1>
                     <?php
 
 if (pg_num_rows ($result) == 0) {

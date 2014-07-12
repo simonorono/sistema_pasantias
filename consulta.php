@@ -3,9 +3,10 @@
 
 include('db.php');
 $db = new PgDB();
-$num_total_registros = pg_num_rows($db->query("SELECT * FROM usuario,pasantia WHERE pasantia.usuario_id=usuario.id"));
+$periodos=($db->query("SELECT * FROM periodo where periodo.activo=TRUE"));
+$rowp = pg_fetch_array($periodos);
+$num_total_registros = pg_num_rows($db->query("SELECT * FROM usuario,pasantia WHERE pasantia.usuario_id=usuario.id AND pasantia.periodo_id=$rowp[id]"));
 $tam_total=ceil($num_total_registros/10);
-$periodos=($db->query("SELECT * FROM periodo WHERE periodo.activo=TRUE"));
 date_default_timezone_set('America/Caracas');
 
 ?>
@@ -29,7 +30,7 @@ echo "<select name='indice' id='pagina'>";
 
 for($i=0;$i<$tam_total;$i++)
 {
-    echo "<option value='".$i."'>".$i."</option>";
+    echo "<option value='".$i."'>".($i+1)."</option>";
 }
 
     ?>
@@ -71,7 +72,7 @@ else {
 
 }
 if(!$busqueda) {
-    $qry = "SELECT * FROM usuario, pasantia, periodo WHERE pasantia.periodo_id=periodo.id AND pasantia.usuario_id=usuario.id AND periodo.activo=TRUE LIMIT $TAMANO_PAGINA OFFSET $pos";
+    $qry = "SELECT * FROM usuario,pasantia,periodo WHERE pasantia.periodo_id=periodo.id AND pasantia.usuario_id=usuario.id AND periodo.activo=TRUE ORDER BY pasantia.id LIMIT $TAMANO_PAGINA OFFSET $pos";
     $results = $db->query($qry);
     while($row = pg_fetch_array($results))
     {

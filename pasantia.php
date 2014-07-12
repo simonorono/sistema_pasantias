@@ -14,14 +14,14 @@ if (isset($_GET['validar'])) {
     $today = date ('Y-m-d', time());
     $qry = "UPDATE pasantia SET valida = TRUE, m02_aceptada = '$today' WHERE pasantia.id = $id";
     $db->query($qry);
-    header ("Location: pasantias.php");
+    header ("Location: done.php?=pasantias.php");
 }
 
 if (isset($_GET['eliminar'])) {
     $id = $_GET['eliminar'];
     $qry = "DELETE FROM pasantia WHERE pasantia.id = $id";
     $db->query($qry);
-    header ("Location: pasantias.php");
+    header ("Location: done.php?go=pasantias.php");
 }
 
 if (isset($_GET['id'])) {
