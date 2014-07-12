@@ -39,14 +39,14 @@ CREATE TABLE usuario
     apellido varchar(30),
     cedula varchar(30),
     email varchar(254),
+    direccion text,
     tipo tipo_cuenta NOT NULL,
     cod_carne char(11),
     telefono_celu char(14),
     telefono_habi char(14),
     PRIMARY KEY (id),
     UNIQUE (username),
-    UNIQUE (email),
-    UNIQUE (cod_carne)
+    UNIQUE (email)
 );
 
 COMMENT ON COLUMN usuario.id IS 'El identificador único de un usuario';
@@ -56,6 +56,7 @@ COMMENT ON COLUMN usuario.nombre IS 'El primer nombre del usuario';
 COMMENT ON COLUMN usuario.apellido IS 'El apellido del usuario';
 COMMENT ON COLUMN usuario.cedula IS 'La cédula del usuario';
 COMMENT ON COLUMN usuario.email IS 'El correo del usuario';
+COMMENT ON COLUMN usuario.direccion IS 'La dirección del usuario';
 COMMENT ON COLUMN usuario.tipo IS 'El tipo de cuenta';
 COMMENT ON COLUMN usuario.cod_carne IS 'El código de carné (si aplica)';
 COMMENT ON COLUMN usuario.telefono_celu IS 'El teléfono celular';

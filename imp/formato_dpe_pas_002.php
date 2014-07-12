@@ -173,7 +173,7 @@ class PDF_MC_Table extends FPDF
 
 
         //QUERY PARA DATOS DEL ALUMNO, MODIFICAR EN LA BD telefono_celu y email (VER QUERY PARA DATOS DE LA EMPRESA)
-        $qryUsr = "SELECT nombre, apellido, cedula, cod_carne, telefono_celu, telefono_habi, email FROM
+        $qryUsr = "SELECT nombre, apellido, cedula, direccion, cod_carne, telefono_celu, telefono_habi, email FROM
             usuario WHERE usuario.id = $id";
 
         $reco = $db->query($qryUsr);
@@ -193,14 +193,14 @@ class PDF_MC_Table extends FPDF
         $this->SetAligns(array('L'));
 
 
-        $this->Row(array("\nNombres y Apellidos: $rowUsr[nombre] $rowUsr[apellido]"));
+        $this->Row(array(utf8_decode("\nNombres y Apellidos: $rowUsr[nombre] $rowUsr[apellido]")));
 
         $this->SetX(20);
         $this->SetWidths(array(170));
         $this->SetAligns(array('L'));
 
-
-        $this->Row(array((utf8_decode("\nDirección: "))));
+        //AQUI ES DONDE VA LA DIRECCIÓN DEL USUARIO
+        $this->Row(array((utf8_decode("\nDirección: $rowUsr[direccion]"))));
 
         $this->SetX(20);
         $this->SetWidths(array(85,85));
@@ -219,7 +219,7 @@ class PDF_MC_Table extends FPDF
 
 
         //QUERY PARA DATOS DE LA EMPRESA (POR ESO HAY QUE CAMBIAR, AQUI HAY AMBIGÜEDAD con telefono_celu y email, yo puse: telefono_cel y email_empresa)
-        $qryEmpr = "SELECT compania, direccion, pasantia.telefono_celu, telefono_ofic, pasantia.email
+        $qryEmpr = "SELECT compania, pasantia.direccion, pasantia.telefono_celu, telefono_ofic, pasantia.email
                 FROM pasantia INNER JOIN usuario ON pasantia.usuario_id = usuario.id AND usuario.id = $id";
 
         $reco = $db->query($qryEmpr);
@@ -236,7 +236,7 @@ class PDF_MC_Table extends FPDF
         $this->SetX(20);
         $this->SetWidths(array(170));
         $this->SetAligns(array('L'));
-        $this->Row(array("\nNombre: $rowEmpr[compania]"));
+        $this->Row(array(utf8_decode("\nNombre: $rowEmpr[compania]")));
 
         $this->SetX(20);
         $this->SetWidths(array(170));
@@ -255,7 +255,7 @@ class PDF_MC_Table extends FPDF
 
 
         //QUERY PARA DATOS DEL PASANTE
-        $qryPas = "SELECT actividad, supervisor, cargo_supervisor, departamento, fecha_inicio, fecha_fin, tiempo_completo, actividades
+        $qryPas = "SELECT actividad, supervisor, cargo_supervisor, departamento, fecha_inicio::timestamp::date, fecha_fin::timestamp::date, tiempo_completo, actividades
                 FROM pasantia INNER JOIN usuario ON pasantia.usuario_id = usuario.id AND usuario.id = $id";
 
         $reco = $db->query($qryPas);
@@ -293,10 +293,21 @@ class PDF_MC_Table extends FPDF
         $this->SetAligns(array('L'));
         $this->Row(array((utf8_decode("\nFecha de inicio: $rowPas[fecha_inicio]")), (utf8_decode("\nFecha de finalización: $rowPas[fecha_fin]")) ));
 
-        $this->SetX(5);
-        $this->SetWidths(array(45, 45, 17.5, 45, 17.5));
-        $this->SetAligns(array('L'));
-        $this->Row(array((utf8_decode("\nTiempo de pasantía: ")), (utf8_decode("\nTiempo completo: ")), (utf8_decode("\n")), (utf8_decode("\nMedio tiempo: ")), (utf8_decode("\n"))));
+        if($rowPas['tiempo_completo'] == TRUE)
+        {
+            $this->SetX(5);
+            $this->SetWidths(array(45, 45, 17.5, 45, 17.5));
+            $this->SetAligns(array('L'));
+            $this->Row(array((utf8_decode("\nTiempo de pasantía: ")), (utf8_decode("\nTiempo completo: ")), (utf8_decode("  \n     X  ")), (utf8_decode("\nMedio tiempo: ")), (utf8_decode("\n"))));
+        }
+
+        else
+        {
+            $this->SetX(5);
+            $this->SetWidths(array(45, 45, 17.5, 45, 17.5));
+            $this->SetAligns(array('L'));
+            $this->Row(array((utf8_decode("\nTiempo de pasantía: ")), (utf8_decode("\nTiempo completo: ")), (utf8_decode("\n")), (utf8_decode("\nMedio tiempo: ")), (utf8_decode("  \n     X  "))));
+        }
 
         $this->SetX(20);
         $this->SetWidths(array(170));

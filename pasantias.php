@@ -106,6 +106,12 @@ if (isset($error)) {
         $pos = ($pagina) * $TAMANO_PAGINA;
 
     }
+    if(isset($_GET['busqueda']) && isset($_GET['bandera'])){
+        $busqueda=$_GET['busqueda'];
+        $bandera=$_GET['bandera'];
+    }
+    else
+        $bandera=0;
     if(!$busqueda){
         for ($i = 0; $i < $TAMANO_PAGINA; $i++) {
             if($num_total_registros<=($i+$pos))
@@ -123,9 +129,13 @@ if (isset($error)) {
         }
     }
     else{
-        $qry= $qry."AND usuario.cedula LIKE '$busqueda%'";
+        $pos=$bandera* $TAMANO_PAGINA;
+        $qry= $qry."AND usuario.cedula LIKE '%$busqueda%'";
         $pasantias=$db->query($qry);
-        $row = pg_fetch_row($pasantias, 0);
+        for ($i = 0; $i < $TAMANO_PAGINA; $i++){
+            if(pg_num_rows($pasantias)<=($i+$pos))
+                break;
+            $row = pg_fetch_row($pasantias, ($i+$pos));
                         ?>
                         <tr class="periodo_tr">
                             <td class="periodo_td"><a href="pasantia.php?id=<?php echo $row[3]; ?>"><?php echo $row[0]; ?></a></td>
@@ -134,10 +144,25 @@ if (isset($error)) {
                         </tr>
                         <?php
     }
-}
+}}
 
                         ?>
                     </table>
+                    <?php
+if($busqueda)
+{
+    if($bandera==0 && ceil(pg_num_rows($pasantias)/10)==1)
+        echo "<a href='pasantias.php?bandera=1&busqueda=".$busqueda."'>pagina siguiente</a>";
+    else if($bandera<ceil(pg_num_rows($pasantias)/10) ){
+        echo "<a href='pasantias.php?bandera=".($bandera+1)."&busqueda=".$busqueda."'>pagina siguiente</a>";
+        echo "<br>";
+        echo "<a href='pasantias.php?bandera=".($bandera-1)."&busqueda=".$busqueda."'>pagina anterior</a>";
+    }
+    else if ($bandera==ceil(pg_num_rows($pasantias)/10))
+        echo "<a href='pasantias.php?bandera=".($bandera-1)."&busqueda=".$busqueda."'>pagina anterior</a>";
+
+
+}?>
                 </div>
             </div>
             <br/>

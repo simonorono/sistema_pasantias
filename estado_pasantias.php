@@ -3,6 +3,7 @@
 require_once('globals.php');
 validate_session2('tutor_licom', 'dpe');
 date_default_timezone_set('America/Caracas');
+$tipo = session_var('tipo_cuenta');
 
 ?>
 
@@ -19,9 +20,9 @@ date_default_timezone_set('America/Caracas');
             </div>
             <?php
 if ($tipo == 'tutor_licom') {
-    require_once('include/menu_estudiante.php');
-} else ($tipo == 'dpe') {
     require_once('include/menu_licom.php');
+} else if ($tipo == 'dpe') {
+    require_once('include/menu_dpe.php');
 }
             ?>
             <div class="content">
