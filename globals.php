@@ -25,8 +25,8 @@ function logout() {
 }
 
 function session_var($name) {
-    session_start();
-    if (session_status() == PHP_SESSION_NONE) return null;
+    if (session_status() == PHP_SESSION_NONE)
+        return null;
     else
         return $_SESSION[$name];
 }
