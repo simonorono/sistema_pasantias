@@ -128,11 +128,10 @@ if (isset($error)) {
                         </tr>
                         <?php
         }
-
     }
     else{
         $pos=$bandera * $TAMANO_PAGINA;
-        $qry= $qry."WHERE usuario.cedula LIKE '%$busqueda%' LIMIT $TAMANO_PAGINA OFFSET $pos";
+        $qry= "SELECT usuario.cedula, usuario.nombre, usuario.apellido, pasantia.id FROM pasantia INNER JOIN usuario ON usuario.id = pasantia.usuario_id AND pasantia.periodo_id = $periodo WHERE usuario.cedula LIKE '%$busqueda%' ORDER BY usuario.cedula LIMIT $TAMANO_PAGINA OFFSET $pos";
         $pasantias=$db->query($qry);
         for ($i = 0; $i < pg_num_rows($pasantias); $i++){//debido a que el qry cambia la cantidad de rows por busqueda tambien
             $row = pg_fetch_row($pasantias, $i);

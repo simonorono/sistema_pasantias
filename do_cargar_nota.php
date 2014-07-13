@@ -23,7 +23,7 @@ if (isset($val)) {
     $today = date ('Y-m-d', time());
     $qry = "UPDATE pasantias SET m09_nota_cargada = '$today', aprobada = $val";
     $db->query($qry);
-    header ("Location: done.php?=estado_pasantias.php");
+    header ("Location: done.php?go=estado_pasantias.php");
 }
 
 ?>

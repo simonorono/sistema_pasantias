@@ -28,7 +28,7 @@ if (isset($_GET['id'])) {
     $id = $_GET['id'];
     $headers = ['Compañia', 'Email', 'Departamento', 'Dirección', 'Dirigido a', 'Actividad', 'Actividades', 'Supervisor', 'Cargo del supervisor', 'Horario', 'Teléfono celular', 'Teléfono de oficina', 'Tiempo completo', 'Fecha de inicio', 'Fecha de fin'];
 
-    $qry = "SELECT compania, email, departamento, direccion, dirigido_a, actividad, actividades, supervisor, cargo_supervisor, horario, telefono_celu, telefono_ofic, tiempo_completo, fecha_inicio, fecha_fin FROM pasantia WHERE pasantia.id = $id";
+    $qry = "SELECT compania, email, departamento, direccion, dirigido_a, actividad, actividades, supervisor, cargo_supervisor, horario, telefono_celu, telefono_ofic, tiempo_completo, fecha_inicio, fecha_fin, numero_carta, valida FROM pasantia WHERE pasantia.id = $id";
 
     $result = $db->query($qry);
 }
@@ -64,6 +64,10 @@ else {
                     <?php
 if (pg_num_rows($result) != 0) {
     $pasantia = pg_fetch_row($result, 0);
+    if ($pasantia[12] == "t") $pasantia[12] = "Sí";
+    else $pasantia = "No";
+    $pasantia[13] = date_format (DateTime::createFromFormat('Y-m-d 00:00:00', $pasantia[13]), 'd/m/Y');
+    $pasantia[14] = date_format (DateTime::createFromFormat('Y-m-d 00:00:00', $pasantia[14]), 'd/m/Y');
                     ?>
 
                     <table>
@@ -84,14 +88,18 @@ if (pg_num_rows($result) != 0) {
                                 <p>
                                     <?php
     if ($tipo_cuenta == 'dpe') {
+        if ($pasantia[15] == null) {
                                     ?>
                                     <a href="numero_carta.php?id=<?php echo $_GET['id'] ?>">Asignar número de carta</a>
                                     <?php
+        }
     } else {
+        if ($pasantia[16] == null) {
                                     ?>
                                     <a href="pasantia.php?validar=<?php echo $_GET['id'] ?>">Validar</a>  -
                                     <a style="paddig-left: 2px" href="pasantia.php?eliminar=<?php echo $_GET['id'] ?>">Eliminar</a>
                                     <?php
+        }
     }
                                     ?>
                                 </p>
