@@ -20,8 +20,9 @@ if ($nota == "aprobada") {
 }
 
 if (isset($val)) {
+    $id = $_GET['id'];
     $today = date ('Y-m-d', time());
-    $qry = "UPDATE pasantias SET m09_nota_cargada = '$today', aprobada = $val";
+    $qry = "UPDATE pasantia SET m09_carga_nota = '$today', aprobada = $val WHERE pasantia.id = $id";
     $db->query($qry);
     header ("Location: done.php?go=estado_pasantias.php");
 }
