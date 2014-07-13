@@ -9,17 +9,14 @@
                 <p class="pmenu"><a href="registrar_pasantia.php">Registrar pasantia</a></p>
                 <p class="pmenu"><a href="carta_001.php">Carta de postulación</a></p>
                 <p class="pmenu"><a href="carta_002.php">Carta de registro</a></p>
+                <?php
+                $id=session_var('usuario_id');
+                echo "<p class='pmenu'><a href='consulta_estudiante.php?id=".$id."'>Estado de pasantia</a></p>";
+                ?>
                 <p class="pmenu"><a href="logout.php">Salir</a></p>
             </div>
         </div>
-        <div class="AccordionPanel">
-            <div class="AccordionPanelTab">Tutores</div>
-            <div class="AccordionPanelContent">
-                <p>
-                    <a href="index.php">Inicio</a>
-                </p>
-            </div>
-        </div>
+
     </div>
     <script type="text/javascript">
         var Accordion1 = new Spry.Widget.Accordion("menu");

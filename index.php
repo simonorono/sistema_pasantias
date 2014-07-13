@@ -17,6 +17,12 @@ if(isset($tipo_cuenta) &&
     }
 }
 
+$usr = "";
+
+if (isset($_GET['u'])) {
+    $usr = $_GET['u'];
+}
+
 ?>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -35,17 +41,24 @@ if(isset($tipo_cuenta) &&
                 <?php require_once("include/fecha.php"); ?>
                 <div align="center">
                     <h1>Inicio de sesión</h1>
-                    <table class="s_table">
+                    <?php
+if (isset($_GET['err'])) {
+                    ?>
+                    <div style="color:#DC0909">Usuario o contraseña incorrectos.</div>
+                    <?php
+} else { echo '<br/>'; }
+                    ?>
+                    <table class="s_table" id="tabla">
                         <tr>
                             <td>
                                 <form method="post" action="do_inicio.php">
                                     <p>
                                         <label for="usuario">Nombre de usuario</label>
-                                        <input type="text" name="username" id="username"/>
+                                        <input type="text" name="username" id="username" value="<?php echo $usr; ?>" required/>
                                     </p>
                                     <p>
                                         <label for="clave">Contraseña</label>
-                                        <input type="password" name="password" id="password" />
+                                        <input type="password" name="password" id="password" required/>
                                     </p>
                                     <p align="center">
                                         <input type="submit" id="button" name="button" value="Ingresar" />

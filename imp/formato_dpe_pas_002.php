@@ -55,6 +55,35 @@ class PDF_MC_Table extends FPDF
         $this->Ln($h);
     }
 
+    function Row_without_borders($data)
+    {
+        $height = 2.2;
+        //Calculate the height of the row
+        $nb=$height;
+        for($i=0;$i<count($data);$i++)
+            $nb=max($nb,$this->NbLines($this->widths[$i],$data[$i]));
+        $h=5*$nb;
+        //Issue a page break first if needed
+        $this->CheckPageBreak($h);
+        //Draw the cells of the row
+        for($i=0;$i<count($data);$i++)
+        {
+            $w=$this->widths[$i];
+            $a=isset($this->aligns[$i]) ? $this->aligns[$i] : 'L';
+            //Save the current position
+            $x=$this->GetX();
+            $y=$this->GetY();
+            //Draw the border
+            //$this->Rect($x,$y,$w,$h);
+            //Print the text
+            $this->MultiCell($w,5,$data[$i],0,$a);
+            //Put the position to the right of the cell
+            $this->SetXY($x+$w,$y);
+        }
+        //Go to the next line
+        $this->Ln($h);
+    }
+
     function CheckPageBreak($h)
     {
         //If the height h would cause an overflow, add a new page immediately
@@ -183,8 +212,10 @@ class PDF_MC_Table extends FPDF
         //Identificación del Alumno
         $this->SetFont('Arial','B',12);
         $this->SetXY(20,60);
-        $this->MultiCell($ancho,$alto,utf8_decode("Identificación del Alumno: "),0);
-
+        //$this->MultiCell($ancho,$alto,utf8_decode("Identificación del Alumno: "),0);
+        $this->SetWidths(array(170));
+        $this->SetAligns(array('L'));
+        $this->Row_without_borders(array(utf8_decode("\nIdentificación del Alumno: \n ")));
 
         $this->SetFont('Arial','',12);
 
@@ -219,7 +250,7 @@ class PDF_MC_Table extends FPDF
 
 
         //QUERY PARA DATOS DE LA EMPRESA (POR ESO HAY QUE CAMBIAR, AQUI HAY AMBIGÜEDAD con telefono_celu y email, yo puse: telefono_cel y email_empresa)
-        $qryEmpr = "SELECT compania, pasantia.direccion, pasantia.telefono_celu, telefono_ofic, pasantia.email
+        $qryEmpr = "SELECT compania, usuario.direccion, pasantia.telefono_celu, telefono_ofic, pasantia.email
                 FROM pasantia INNER JOIN usuario ON pasantia.usuario_id = usuario.id AND usuario.id = $id";
 
         $reco = $db->query($qryEmpr);
@@ -228,8 +259,9 @@ class PDF_MC_Table extends FPDF
 
         //Identificación de la Empresa
         $this->SetFont('Arial','B',12);
-        $this->SetXY(20,130);
-        $this->MultiCell($ancho,$alto,utf8_decode("Identificación de la Empresa / Institución:"),0);
+        $this->SetWidths(array(170));
+        $this->SetAligns(array('L'));
+        $this->Row_without_borders(array(utf8_decode("\n\nIdentificación de la Empresa / Institución: \n ")));
 
         $this->SetFont('Arial', '', 12);
 
@@ -263,8 +295,9 @@ class PDF_MC_Table extends FPDF
 
         //Datos de las actividades de la Pasantia
         $this->SetFont('Arial','B',12);
-        $this->SetXY(20,190);
-        $this->MultiCell($ancho,$alto,utf8_decode("Datos de las actividades de la Pasantía: "),0);
+        $this->SetWidths(array(170));
+        $this->SetAligns(array('L'));
+        $this->Row_without_borders(array(utf8_decode("\n\nDatos de las actividades de la Pasantía: \n ")));
 
         $this->SetFont('Arial', '', 12);
 
@@ -295,7 +328,6 @@ class PDF_MC_Table extends FPDF
 
         if($rowPas['tiempo_completo'] == TRUE)
         {
-            $this->SetX(5);
             $this->SetWidths(array(45, 45, 17.5, 45, 17.5));
             $this->SetAligns(array('L'));
             $this->Row(array((utf8_decode("\nTiempo de pasantía: ")), (utf8_decode("\nTiempo completo: ")), (utf8_decode("  \n     X  ")), (utf8_decode("\nMedio tiempo: ")), (utf8_decode("\n"))));
@@ -303,7 +335,6 @@ class PDF_MC_Table extends FPDF
 
         else
         {
-            $this->SetX(5);
             $this->SetWidths(array(45, 45, 17.5, 45, 17.5));
             $this->SetAligns(array('L'));
             $this->Row(array((utf8_decode("\nTiempo de pasantía: ")), (utf8_decode("\nTiempo completo: ")), (utf8_decode("\n")), (utf8_decode("\nMedio tiempo: ")), (utf8_decode("  \n     X  "))));
@@ -312,7 +343,7 @@ class PDF_MC_Table extends FPDF
         $this->SetX(20);
         $this->SetWidths(array(170));
         $this->SetAligns(array('L'));
-        $this->Row(array((utf8_decode("\nActividades a realizar por el pasante: \n$rowPas[actividades]"))));
+        $this->Row(array((utf8_decode("\nActividades a realizar por el pasante: \n\n$rowPas[actividades]"))));
 
 
         $this->SetX(20);
@@ -329,5 +360,6 @@ $pdf->AddPage();
 $pdf->Membrete();
 $pdf->formatoTabla();
 $pdf->Output("formato_dpe_pas_002.pdf", "D");
+//$pdf->Output();
 
 ?>

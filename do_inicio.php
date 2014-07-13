@@ -27,8 +27,7 @@ else {
 if ($hash_password != $db_password) $error = 2;
 
 if (isset($error)) {
-    header('Content-Type: text/html; charset=utf-8');
-    die($error_inicio[$error]);
+    header("Location: index.php?u=$username&err=1");
 }
 else {
     session_start();
