@@ -85,14 +85,28 @@ $pdf->MultiCell(153,5,utf8_decode("Ciudadano \n$ciudadano\nSu Despacho.-"), 0, "
 
 //Cuerpo de la carta
 $pdf->SetXY(30,100);
-$pdf->MultiCell(153,5,utf8_decode("Sirva la presente para postular al Br $nombre titular de la Cédula de Identidad No.: $cedula, estudiante de la Licenciatura en Computación de la Facultad Experimental de Ciencias de la Universidad del Zulia para desempeñarse como pasante de su organización.\n
-	El periodo de pasantía debe tener una duración mínima de seis (6) semanas a tiempo completo o doce (12) semanas a medio tiempo, quedando la remuneración otorgada al pasante, el horario y duración definitiva del periodo de común acuerdo entre las partes.
-	\nSu organización asignará un supervisor que deberá cumplir con las siguientes asignaciones:
-	*\t\t\tOrientar y evaluar las actividades desempeñadas por el pasante.
-	*\t\t\tEnviar el formato de actividades a realizar por el pasante (Formato_DPE-PAS-002_Registro de Pasantías) en un sobre sellado al supervisor académico al inicio de las pasantías.
-	*\t\t\tRevisar el informe final de la pasantía.
-	*\t\t\tEnviar el formato de evaluación (Formato_DPE-PAS-003_Evaluación de Pasantías) en un sobre sellado al supervisor académico al finalizar las pasantías.
-	\nSin otro particular a que hacer referencia, atentamente,\n\n"),0,'J',0);
+$pdf->MultiCell(153,5,utf8_decode("Sirva la presente para postular al Br $nombre titular de la Cédula de Identidad No.: $cedula, estudiante de la Licenciatura en Computación de la Facultad Experimental de Ciencias de la Universidad del Zulia para desempeñarse como pasante de su organización."),0,'J',0);
+
+$pdf->Ln();
+$pdf->SetX(30);
+$pdf->MultiCell(153,5,utf8_decode("El periodo de pasantía debe tener una duración mínima de seis (6) semanas a tiempo completo o doce (12) semanas a medio tiempo, quedando la remuneración otorgada al pasante, el horario y duración definitiva del periodo de común acuerdo entre las partes."),0,'J',0);
+
+$pdf->Ln();
+$pdf->SetX(30);
+$pdf->MultiCell(153,5,utf8_decode("Su organización asignará un supervisor que deberá cumplir con las siguientes asignaciones: "),0,'J',0);
+
+$pdf->Ln();
+$pdf->SetX(35);
+$pdf->MultiCell(147,5,utf8_decode("*    Orientar y evaluar las actividades desempeñadas por el pasante."),0,'J',0);
+
+$pdf->SetX(35);
+$pdf->MultiCell(147,5,utf8_decode("* Enviar el formato de actividades a realizar por el pasante (Formato_DPE-PAS-002_Registro de Pasantías) en un sobre sellado al supervisor académico al inicio de las pasantías."),0,'J',0);
+
+$pdf->SetX(35);
+$pdf->MultiCell(147,5,utf8_decode("*    Revisar el informe final de la pasantía."),0,'J',0);
+
+$pdf->SetX(35);
+$pdf->MultiCell(147,5,utf8_decode("*   Enviar el formato de evaluación (Formato_DPE-PAS-003_Evaluación de Pasantías) en un sobre sellado al supervisor académico al finalizar las pasantías."),0,'J',0);
 
 
 //Atentamente...

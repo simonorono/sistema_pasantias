@@ -17,7 +17,7 @@ if (pg_num_rows($periodo) == 0) $error = 'periodo';
 else {
     $periodo = pg_fetch_row($periodo, 0)[0];
 
-    $qry = "SELECT usuario.cedula, usuario.nombre, usuario.apellido, pasantia.id FROM pasantia INNER JOIN usuario ON usuario.id = pasantia.usuario_id AND pasantia.periodo_id = $periodo";
+    $qry = "SELECT usuario.cedula, usuario.nombre, usuario.apellido, pasantia.id FROM pasantia INNER JOIN usuario ON usuario.id = pasantia.usuario_id AND pasantia.periodo_id = $periodo ORDER BY usuario.cedula";
 
     if ($tipo_cuenta == 'dpe') $qry = $qry . "AND pasantia.valida = TRUE";
 
@@ -114,7 +114,9 @@ if (isset($error)) {
         $bandera=0;
     if(!$busqueda){
         for ($i = 0; $i < $TAMANO_PAGINA; $i++) {
-
+            if($num_total_registros<=($i+$pos))
+                break;
+            else{
                 $row = pg_fetch_row($pasantias, ($i+$pos));
 
                         ?>
@@ -124,17 +126,14 @@ if (isset($error)) {
                             <td class="periodo_td"><?php echo $row[2]; }?></td>
                         </tr>
                         <?php
-                if($num_total_registros<=($i+$pos))
-                break;
+            }
 
     }
     else{
         $pos=$bandera * $TAMANO_PAGINA;
         $qry= $qry."WHERE usuario.cedula LIKE '%$busqueda%' LIMIT $TAMANO_PAGINA OFFSET $pos";
-        echo "$pos";
         $pasantias=$db->query($qry);
-        for ($i = 0; $i < $TAMANO_PAGINA; $i++){
-
+        for ($i = 0; $i < pg_num_rows($pasantias); $i++){//debido a que el qry cambia la cantidad de rows por busqueda tambien
             $row = pg_fetch_row($pasantias, $i);
                         ?>
                         <tr class="periodo_tr">
@@ -143,8 +142,7 @@ if (isset($error)) {
                             <td class="periodo_td"><?php echo $row[2]; ?></td>
                         </tr>
                         <?php
-            if(pg_num_rows($pasantias)<($i+$pos))
-            break;
+
         }
     }
 }
@@ -152,13 +150,13 @@ if (isset($error)) {
                         ?>
                     </table>
                     <?php
-if($busqueda)
+if(isset($busqueda))
 {
-    if($bandera==0 && ceil(pg_num_rows($pasantias)/10)==1)
+    if($bandera==0 && ceil(pg_num_rows($pasantias)/10)>1)
         echo "<a href='pasantias.php?bandera=".($bandera+=1)." &busqueda=".$busqueda."'>pagina siguiente</a>";
     else if ($bandera==ceil(pg_num_rows($pasantias)/10))
         echo "<a href='pasantias.php?bandera=".($bandera-=1)."&busqueda=".$busqueda."'>pagina anterior</a>";
-    else if($bandera<ceil(pg_num_rows($pasantias)/10) ){
+    else if($bandera>0 && $bandera<ceil(pg_num_rows($pasantias)/10) ){
         echo "<a href='pasantias.php?bandera=".($bandera+=1)."&busqueda=".$busqueda."'>pagina siguiente</a>";
         echo "<br>";
         echo "<a href='pasantias.php?bandera=".($bandera-=1)."&busqueda=".$busqueda."'>pagina anterior</a>";
@@ -209,9 +207,11 @@ if($busqueda)
     }
     th {font-weight:200;
         background-color:#82c0ff;
-        background:-o-linear-gradient(bottom, #82c0ff 5%, #56aaff 100%);    background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #82c0ff), color-stop(1, #56aaff) );
+        background:-o-linear-gradient(bottom, #82c0ff 5%, #56aaff 100%);
+        background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #82c0ff), color-stop(1, #56aaff) );
         background:-moz-linear-gradient( center top, #82c0ff 5%, #56aaff 100% );
-        filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#82c0ff", endColorstr="#56aaff");  background: -o-linear-gradient(top,#82c0ff,56aaff);
+        filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#82c0ff", endColorstr="#56aaff");
+        background: -o-linear-gradient(top,#82c0ff,56aaff);
         background-color:#FFF;
         border-top: solid 1px black;
         border-bottom: solid 1px gray;

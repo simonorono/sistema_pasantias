@@ -11,14 +11,7 @@
                 <p class="pmenu"><a href="logout.php">Salir</a></p>
             </div>
         </div>
-        <div class="AccordionPanel">
-            <div class="AccordionPanelTab">General</div>
-            <div class="AccordionPanelContent">
-                <p>
-                    <a href="index.php">Inicio</a>
-                </p>
-            </div>
-        </div>
+
     </div>
     <script type="text/javascript">
         var Accordion1 = new Spry.Widget.Accordion("menu");

@@ -17,7 +17,7 @@ validate_session('tutor_licom');
             <div class="header">
                 <?php include("include/cabecera.php"); ?>
             </div>
-            <?php require_once('include/menu_estudiantes.php'); ?>
+            <?php require_once('include/menu_licom.php'); ?>
             <div class="content">
                 <?php require_once("include/fecha.php"); ?>
                 <div align="center">

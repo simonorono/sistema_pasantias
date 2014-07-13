@@ -58,24 +58,24 @@ $TAMANO_PAGINA = 10;
 
 //examino la página a mostrar y el inicio del registro a mostrar
 extract($_POST);
-    if(!(isset($indice) && isset($search))){
-        $pos = 0;
+if(!(isset($indice) && isset($search))){
+    $pos = 0;
     $pagina=1;
     $busqueda=null;
-    }
+}
 
-    else{
+else{
     $pagina=$indice;
     $busqueda=$search;
     $pos = ($pagina) * $TAMANO_PAGINA;
 
-    }
-    if(isset($_GET['busqueda']) && isset($_GET['bandera'])){
-        $busqueda=$_GET['busqueda'];
-        $bandera=$_GET['bandera'];
-    }
+}
+if(isset($_GET['busqueda']) && isset($_GET['bandera'])){
+    $busqueda=$_GET['busqueda'];
+    $bandera=$_GET['bandera'];
+}
 if(!$busqueda) {
-    $qry = "SELECT * FROM usuario,pasantia,periodo WHERE pasantia.periodo_id=periodo.id AND pasantia.usuario_id=usuario.id AND periodo.activo=TRUE ORDER BY pasantia.id LIMIT $TAMANO_PAGINA OFFSET $pos";
+    $qry = "SELECT * FROM usuario,pasantia,periodo WHERE pasantia.periodo_id=periodo.id AND pasantia.usuario_id=usuario.id AND periodo.activo=TRUE ORDER BY usuario.cedula LIMIT $TAMANO_PAGINA OFFSET $pos";
     $results = $db->query($qry);
     while($row = pg_fetch_array($results))
     {
@@ -171,12 +171,12 @@ else
 {
     if(!isset($_GET['bandera']))
     {
-    $results= $db->query("SELECT * FROM usuario, pasantia WHERE usuario.cedula LIKE '%$busqueda%' AND pasantia.usuario_id = usuario.id AND pasantia.periodo_id=$rowp[id] LIMIT $TAMANO_PAGINA OFFSET 0");
-    $bandera=0;
+        $results= $db->query("SELECT * FROM usuario, pasantia WHERE usuario.cedula LIKE '%$busqueda%' AND pasantia.usuario_id = usuario.id AND pasantia.periodo_id=$rowp[id] LIMIT $TAMANO_PAGINA OFFSET 0");
+        $bandera=0;
     }
     else{
-    $pos=$bandera* $TAMANO_PAGINA;
-    $results= $db->query("SELECT * FROM usuario, pasantia WHERE usuario.cedula LIKE '%$busqueda%' AND pasantia.usuario_id = usuario.id AND pasantia.periodo_id=$rowp[id] LIMIT $TAMANO_PAGINA OFFSET '$pos'");
+        $pos=$bandera* $TAMANO_PAGINA;
+        $results= $db->query("SELECT * FROM usuario, pasantia WHERE usuario.cedula LIKE '%$busqueda%' AND pasantia.usuario_id = usuario.id AND pasantia.periodo_id=$rowp[id] ORDER BY usuario.cedula DESC LIMIT $TAMANO_PAGINA OFFSET '$pos'");
     }
     if(pg_num_rows($results)<1) {
         echo "<h2>Ningún usuario posee la cédula buscada<h2>";
@@ -268,16 +268,16 @@ else
             }
 
             echo "</tr>";
-         }
+        }
     }
 }
 
 echo "</table>";
 if($busqueda)
 {
-    if($bandera==0 && ceil(pg_num_rows($results)/10)==1)
+    if($bandera==0 && ceil(pg_num_rows($results)/10)>1)
         echo "<a href='estado_pasantias.php?bandera=1&busqueda=".$busqueda."'>pagina siguiente</a>";
-    else if($bandera<ceil(pg_num_rows($results)/10) ){
+    else if($bandera>0 &&$bandera<ceil(pg_num_rows($results)/10) ){
         echo "<a href='estado_pasantias.php?bandera=".($bandera+1)."&busqueda=".$busqueda."'>pagina siguiente</a>";
         echo "<br>";
         echo "<a href='estado_pasantias.php?bandera=".($bandera-1)."&busqueda=".$busqueda."'>pagina anterior</a>";
