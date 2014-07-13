@@ -5,6 +5,8 @@ require_once('globals.php');
 
 $db = new PgDB();
 
+date_default_timezone_set('America/Caracas');
+
 validate_session2('tutor_licom', 'dpe');
 
 if (!(isset($_GET['id']) &&

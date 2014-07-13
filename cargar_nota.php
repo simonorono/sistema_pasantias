@@ -4,6 +4,8 @@ require_once('globals.php');
 
 validate_session('tutor_licom');
 
+date_default_timezone_set('America/Caracas');
+
 ?>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
