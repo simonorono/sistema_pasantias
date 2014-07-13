@@ -178,7 +178,7 @@ if($busqueda)
 
 <style type="text/css">
     table {
-        font: 0.8em Arial, Helvetica, sans-serif;
+        font: 1.0em Arial, Helvetica, sans-serif;
 
         background:#e8eef7;
         color:#000;
