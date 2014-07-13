@@ -11,6 +11,7 @@
                 <p class="pmenu"><a href="estado_pasantias.php">Estado pasantías</a></p>
                 <p class="pmenu"><a href="carta_lapsos.php">Generar carta de lapsos</a></p>
                 <p class="pmenu"><a href="pasantias.php">Pasantías</a></p>
+                <p class="pmenu"><a href="reportes.php">Reportes</a></p>
                 <p class="pmenu"><a href="logout.php">Salir</a></p>
             </div>
         </div>

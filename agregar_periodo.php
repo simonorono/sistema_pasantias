@@ -36,7 +36,7 @@ validate_session('tutor_licom');
                                         <select name="tipo" id="tipo">
                                             <option value="primero">Primero</option>
                                             <option value="segundo">Segundo</option>
-                                            <option value="unico">Único</option>
+                                            <option value="único">Único</option>
                                         </select>
                                     </p>
                                     <p align="center">

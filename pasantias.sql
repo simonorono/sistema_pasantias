@@ -5,7 +5,7 @@ CREATE TYPE tipo_periodo AS ENUM
 (
     'primero',
     'segundo',
-    'unico'
+    'único'
 );
 
 CREATE TYPE tipo_cuenta AS ENUM
