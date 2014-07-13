@@ -39,6 +39,10 @@
                                     <input type="text" name="apellido" id="apellido" required/>
                                 </p>
                                 <p>
+                                    <label for="direccion">Dirección</label>
+                                    <textarea name="direccion" id="direccion" required></textarea>
+                                </p>
+                                <p>
                                     <label for="telefono_celu">Telefóno celular</label>
                                     <input type="text" name="telefono_celu" id="telefono_celu" required/>
                                 </p>

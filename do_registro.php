@@ -33,7 +33,8 @@ if (!(isset ($username) &&
       isset ($cedula) &&
       isset ($telefono_celu) &&
       isset ($telefono_habi) &&
-      isset ($cod_carne)))
+      isset ($cod_carne) &&
+      isset ($direccion)))
     die ("Missing parameters.");
 
 if (strlen ($username) < 6) $error = 1;
@@ -47,6 +48,7 @@ if (check_email($email) == 1) $error = 8;
 if (strlen ($cod_carne) != 11) $error = 9;
 if (strlen ($telefono_celu) == 0) $error = 10;
 if (strlen ($telefono_habi) == 0) $error = 11;
+if (strlen ($direccion) == 0) $error = 12;
 
 if (isset ($error)) {
     die($error_registro[$error]);
@@ -57,7 +59,7 @@ else {
 
     $db = new PgDB();
 
-    $qry = "INSERT INTO usuario (username, password, email, nombre, apellido, cedula, tipo, cod_carne, telefono_celu, telefono_habi) VALUES ('$username', '$hash_passwd', '$email', '$nombre', '$apellido', '$cedula', 'estudiante', '$cedula', '$telefono_celu', '$telefono_habi')";
+    $qry = "INSERT INTO usuario (username, password, email, nombre, apellido, cedula, tipo, cod_carne, telefono_celu, telefono_habi, direccion) VALUES ('$username', '$hash_passwd', '$email', '$nombre', '$apellido', '$cedula', 'estudiante', '$cedula', '$telefono_celu', '$telefono_habi', '$direccion')";
 
     $db->query($qry);
     header('Location: done.php?go=index.php');
