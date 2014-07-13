@@ -23,6 +23,6 @@ $qry = "UPDATE pasantia SET numero_carta = '$numero_carta', m03_numero_asignado 
 
 $db->query($qry);
 
-header ('Location: pasantias.php');
+header ('Location: done.php?go=pasantias.php');
 
 ?>

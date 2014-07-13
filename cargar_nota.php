@@ -22,7 +22,7 @@ validate_session('tutor_licom');
                 <?php require_once("include/fecha.php"); ?>
                 <div align="center">
                     <h1>Cargar nota</h1>
-                    <form action="do_cargar_nota.php<?php echo $_GET['id']; ?>" method="post">
+                    <form action="do_cargar_nota.php?id=<?php echo $_GET['id']; ?>" method="post">
                         <select id="nota" name="nota">
                             <option value="aprobada">Aprobada</option>
                             <option value="reprobada">Reprobada</option>
