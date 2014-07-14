@@ -1,9 +1,8 @@
 
 <?php
 
-require_once('db.php');
+include('db.php');
 require_once('globals.php');
-
 $db = new PgDB();
 $periodos=($db->query("SELECT * FROM periodo where periodo.activo=TRUE"));
 $rowp = pg_fetch_array($periodos);
@@ -32,8 +31,9 @@ for($i=0;$i<$tam_total;$i++)
 {
     echo "<option value='".$i."'>".($i+1)."</option>";
 }
+
     ?>
-    <input type="submit" id="boton2" name="boton" value="Ir"/>
+    <input type="submit" style="border-style: hidden;" id="boton2" name="boton" value="aceptar"/>
 </form>
 <table>
     <thead>
@@ -59,27 +59,30 @@ $TAMANO_PAGINA = 10;
 
 //examino la página a mostrar y el inicio del registro a mostrar
 extract($_POST);
-if(!(isset($indice) && isset($search))){
-    $pos = 0;
+    if(!(isset($indice) && isset($search))){
+        $pos = 0;
     $pagina=1;
     $busqueda=null;
-}
+    }
 
-else{
+    else{
     $pagina=$indice;
     $busqueda=$search;
     $pos = ($pagina) * $TAMANO_PAGINA;
 
-}
-if(isset($_GET['busqueda']) && isset($_GET['bandera'])){
-    $busqueda=$_GET['busqueda'];
-    $bandera=$_GET['bandera'];
-}
+    }
+    if(isset($_GET['busqueda']) && isset($_GET['bandera'])){
+        $busqueda=$_GET['busqueda'];
+        $bandera=$_GET['bandera'];
+    }
 if(!$busqueda) {
     $qry = "SELECT * FROM usuario,pasantia,periodo WHERE pasantia.periodo_id=periodo.id AND pasantia.usuario_id=usuario.id AND periodo.activo=TRUE ORDER BY pasantia.id LIMIT $TAMANO_PAGINA OFFSET $pos";
     $results = $db->query($qry);
     while($row = pg_fetch_array($results))
     {
+        // $row es un array con todos los campos existentes en la tabla
+        //var_dump($row[12]);
+        //die();
         echo "<tr>";
 
         echo "<th>".$row['nombre']." ".$row['apellido']."</th>";
@@ -175,12 +178,12 @@ else
 {
     if(!isset($_GET['bandera']))
     {
-        $results= $db->query("SELECT * FROM usuario, pasantia WHERE usuario.cedula LIKE '%$busqueda%' AND pasantia.usuario_id = usuario.id AND pasantia.periodo_id=$rowp[id] LIMIT $TAMANO_PAGINA OFFSET 0");
-        $bandera=0;
+    $results= $db->query("SELECT * FROM usuario, pasantia WHERE usuario.cedula LIKE '%$busqueda%' AND pasantia.usuario_id = usuario.id AND pasantia.periodo_id=$rowp[id] LIMIT $TAMANO_PAGINA OFFSET 0");
+    $bandera=0;
     }
     else{
-        $pos=$bandera* $TAMANO_PAGINA;
-        $results= $db->query("SELECT * FROM usuario, pasantia WHERE usuario.cedula LIKE '%$busqueda%' AND pasantia.usuario_id = usuario.id AND pasantia.periodo_id=$rowp[id] LIMIT $TAMANO_PAGINA OFFSET '$pos'");
+    $pos=$bandera* $TAMANO_PAGINA;
+    $results= $db->query("SELECT * FROM usuario, pasantia WHERE usuario.cedula LIKE '%$busqueda%' AND pasantia.usuario_id = usuario.id AND pasantia.periodo_id=$rowp[id] LIMIT $TAMANO_PAGINA OFFSET '$pos'");
     }
     if(pg_num_rows($results)<1) {
         echo "<h2>Ningún usuario posee la cédula buscada<h2>";
@@ -262,20 +265,23 @@ else
             }
 
             if(!empty($row['m09_carga_nota'])) {
-                if(session_var('tipo_cuenta')=='tutor_licom')
-                    echo "<th>".date( "d/m/Y", strtotime($row['m09_carga_nota']))."</th>";
-                else
-                    echo "<th>nota cargada</th>";
-            }
-            else if(!empty($row['m08_entrega_final'])) {
-                if(session_var('tipo_cuenta')=='tutor_licom')
-                    echo "<th><a href='cargar_nota.php?id=$row[12]'>Cargar nota</a></th>";
-                else
-                    echo "<th>nota no cargada</th>";
-            }
+            if(session_var('tipo_cuenta')=='tutor_licom')
+                echo "<th>".date( "d/m/Y", strtotime($row['m09_carga_nota']))."</th>";
+            else
+                echo "<th>nota cargada</th>";
+        }
+        else if(!empty($row['m08_entrega_final'])) {
+            if(session_var('tipo_cuenta')=='tutor_licom')
+                echo "<th><a href='cargar_nota.php?id=$row[12]'>Cargar nota</a></th>";
+            else
+                echo "<th>nota no cargada</th>";
+        }
+        else {
+            echo "<th><p>---</p></th>";
+        }
 
             echo "</tr>";
-        }
+         }
     }
 }
 
