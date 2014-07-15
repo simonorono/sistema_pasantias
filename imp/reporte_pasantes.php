@@ -58,9 +58,9 @@ function transform($r) {
     else {
         $r["m08_entrega_final"] = "---";
     }
-    //var_dump($r);die();
+
     if ($r["m09_carga_nota"] != null) {
-        if ($r["aprobada"] == "t") {
+        if ($r[13] == "t") {
             $r["m09_carga_nota"] = "Aprobada";
         } else {
             $r["m09_carga_nota"] = "Reprobada";
@@ -100,11 +100,14 @@ $pdf->Ln();
 
 $pdf->Image("logotipo.jpg",20,12,-280);
 
+
+
 $pdf->SetFont('Arial', 'B', '10');
 $pdf->SetWidths(array(25,20,22,22,25,25,25,25,25,25,25));
 $pdf->SetAligns(array('C','C','C','C','C','C','C','C','C','C','C','C'));
 $pdf->Row(array("\nNombre", "\nC.I", "\nRegistrada", "\nAceptada", "Fecha Numero asignado", "\nSellada", "\nEntrega de copia",
                 "\nEntrega de borrador", "\nRetiro borrador", "\nEntrega Final", "\nCarga de Nota"));
+
 
 $reco = pg_query($query);
 
@@ -114,6 +117,7 @@ while($row = pg_fetch_array($reco))
     $pdf->SetWidths(array(25,20,22,22,25,25,25,25,25,25,25));
     $pdf->SetAligns(array('C','C','C','C','C','C','C','C','C','C','C'));
     $row = transform($row);
+    //var_dump($row);die();
 
     $pdf->Row(array("$row[nombre]\n$row[apellido]", "\n$row[cedula]", "\n$row[m01_registrada]", "\n$row[m02_aceptada]",
                     "\n$row[m03_numero_asignado]", "\n$row[m04_sellada]","\n$row[m05_entrego_copia]", "\n$row[m06_entrego_borrador]",
@@ -121,4 +125,5 @@ while($row = pg_fetch_array($reco))
 }
 
 $pdf->Output("reporte_pasantes.pdf" ,"D");
+
 ?>

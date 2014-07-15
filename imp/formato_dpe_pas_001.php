@@ -77,7 +77,7 @@ $pdf->SetXY(30,60);
 $pdf->MultiCell(153,5,utf8_decode("Maracaibo, $fecha"), 0, "J", 0);
 
 $pdf->SetXY(155,70);
-$pdf->MultiCell(153,5,utf8_decode("CP-$nroCP-2010"), 0, "J", 0);
+$pdf->MultiCell(153,5,utf8_decode("CP-$nroCP-2014"), 0, "J", 0);
 
 $pdf->SetXY(30,80);
 $pdf->MultiCell(153,5,utf8_decode("Ciudadano \n$ciudadano\nSu Despacho.-"), 0, "J", 0);

@@ -28,7 +28,7 @@ class PDF_MC_Table extends FPDF
 
     function Row($data)
     {
-        $height = 2;
+        $height = 1.5;
         //Calculate the height of the row
         $nb=$height;
         for($i=0;$i<count($data);$i++)
@@ -57,7 +57,7 @@ class PDF_MC_Table extends FPDF
 
     function Row_without_borders($data)
     {
-        $height = 1.5;
+        $height = 2.2;
         //Calculate the height of the row
         $nb=$height;
         for($i=0;$i<count($data);$i++)
@@ -178,7 +178,7 @@ class PDF_MC_Table extends FPDF
 
         $this->SetFont('Arial','B',14);
         $this->SetXY(147,25);
-        $this->MultiCell(150,5,utf8_decode("DPE-PAS-002"), 0, "J", 0);
+        $this->MultiCell(150,5,utf8_decode("DPE-PAS-003"), 0, "J", 0);
 
         $this->SetFont('Arial','B',7);
         $this->SetXY(157,32.5);
@@ -186,7 +186,7 @@ class PDF_MC_Table extends FPDF
 
         $this->SetFont('Arial','B',10);
         $this->SetXY(30,41);
-        $this->MultiCell(153,5,utf8_decode("\nREGISTRO DE LA PASANTÍA DE LA LICENCIATURA EN COMPUTACIÓN"), 0, "C", 0);
+        $this->MultiCell(153,5,utf8_decode("\nEVALUACIÓN DE LA PASANTÍA DE LA LICENCUATURA EN COMPUTACIÓN"), 0, "C", 0);
 
     }
 
@@ -199,6 +199,7 @@ class PDF_MC_Table extends FPDF
         $this->SetMargins(20,25);
         $alto = 10;
         $ancho = 172;
+
 
         $qryUsr = "SELECT nombre, apellido, cedula, direccion, cod_carne, telefono_celu, telefono_habi, email FROM
             usuario WHERE usuario.id = $id";
@@ -228,6 +229,7 @@ class PDF_MC_Table extends FPDF
         $this->SetWidths(array(170));
         $this->SetAligns(array('L'));
 
+        //AQUI ES DONDE VA LA DIRECCIÓN DEL USUARIO
         $this->Row(array((utf8_decode("\nDirección: $rowUsr[direccion]"))));
 
         $this->SetX(20);
@@ -290,10 +292,12 @@ class PDF_MC_Table extends FPDF
         $rowPas = pg_fetch_array($reco);
 
         //Datos de las actividades de la Pasantia
-        $this->SetFont('Arial','B',12);
+
+        /*$this->SetFont('Arial','B',12);
         $this->SetWidths(array(170));
         $this->SetAligns(array('L'));
         $this->Row_without_borders(array(utf8_decode("\n\nDatos de las actividades de la Pasantía: \n ")));
+        */
 
         $this->SetFont('Arial', '', 12);
 
@@ -315,7 +319,7 @@ class PDF_MC_Table extends FPDF
         $this->SetX(20);
         $this->SetWidths(array(170));
         $this->SetAligns(array('L'));
-        $this->Row(array((utf8_decode("\nDepartamento donde realizará la pasantía: $rowPas[departamento]"))));
+        $this->Row(array((utf8_decode("\nDepartamento donde realizó la pasantía: $rowPas[departamento]"))));
 
         $this->SetX(20);
         $this->SetWidths(array(85,85));
@@ -342,16 +346,92 @@ class PDF_MC_Table extends FPDF
         $this->SetAligns(array('L'));
         $this->Row(array((utf8_decode("\nHorario de trabajo del Pasante: $rowPas[horario]"))));
 
+        $this->Ln();
+
+        //EVALUACIÓN DEL ESTUDIANTE
+        $this->SetFont('Arial', 'B', 12);
+
+        $this->SetX(20);
+        $this->SetWidths(array(170));
+        $this->SetAligns(array('C'));
+        $this->Row(array((utf8_decode("\nEVALUACIÓN DEL ESTUDIANTE POR PARTE DE LA EMPRESA"))));
+
+        $this->SetWidths(array(95, 15, 15, 15, 15, 15));
+        $this->SetAligns(array('C', 'C', 'C', 'C', 'C', 'C'));
+        $this->Row(array((utf8_decode("\nASPECTOS")), "\nDEF", "\nSAT", "\nBUE", "\nMB", "\nEXC"));
+
+        $this->SetFont('Arial', '', 12);
+
+        $this->SetWidths(array(95, 15, 15, 15, 15, 15));
+        $this->SetAligns(array('L', 'C', 'C', 'C', 'C', 'C'));
+        $this->Row(array((utf8_decode("\n Puntualidad")), "", "", "", "", ""));
+
+        $this->SetWidths(array(95, 15, 15, 15, 15, 15));
+        $this->SetAligns(array('L', 'C', 'C', 'C', 'C', 'C'));
+        $this->Row(array((utf8_decode("\n Cooperación")), "", "", "", "", ""));
+
+        $this->SetWidths(array(95, 15, 15, 15, 15, 15));
+        $this->SetAligns(array('L', 'C', 'C', 'C', 'C', 'C'));
+        $this->Row(array((utf8_decode("\n Iniciativa")), "", "", "", "", ""));
+
+        $this->SetWidths(array(95, 15, 15, 15, 15, 15));
+        $this->SetAligns(array('L', 'C', 'C', 'C', 'C', 'C'));
+        $this->Row(array((utf8_decode("\n Habilidad/Destreza")), "", "", "", "", ""));
+
+        $this->SetWidths(array(95, 15, 15, 15, 15, 15));
+        $this->SetAligns(array('L', 'C', 'C', 'C', 'C', 'C'));
+        $this->Row(array((utf8_decode("\n Responsabilidad")), "", "", "", "", ""));
+
+        $this->SetWidths(array(95, 15, 15, 15, 15, 15));
+        $this->SetAligns(array('L', 'C', 'C', 'C', 'C', 'C'));
+        $this->Row(array((utf8_decode("\n Organización")), "", "", "", "", ""));
+
+        $this->SetWidths(array(95, 15, 15, 15, 15, 15));
+        $this->SetAligns(array('L', 'C', 'C', 'C', 'C', 'C'));
+        $this->Row(array((utf8_decode("\n Eficiencia")), "", "", "", "", ""));
+
+        $this->SetWidths(array(95, 15, 15, 15, 15, 15));
+        $this->SetAligns(array('L', 'C', 'C', 'C', 'C', 'C'));
+        $this->Row(array((utf8_decode("\n Dedicación")), "", "", "", "", ""));
+
+        $this->SetWidths(array(95, 15, 15, 15, 15, 15));
+        $this->SetAligns(array('L', 'C', 'C', 'C', 'C', 'C'));
+        $this->Row(array((utf8_decode("\n Respeto Jerárquico")), "", "", "", "", ""));
+
+        $this->SetWidths(array(95, 15, 15, 15, 15, 15));
+        $this->SetAligns(array('L', 'C', 'C', 'C', 'C', 'C'));
+        $this->Row(array((utf8_decode("\n Sociabilidad")), "", "", "", "", ""));
+
+        $this->SetWidths(array(95, 15, 15, 15, 15, 15));
+        $this->SetAligns(array('L', 'C', 'C', 'C', 'C', 'C'));
+        $this->Row(array((utf8_decode("\n Presentación")), "", "", "", "", ""));
+
         $this->SetX(20);
         $this->SetWidths(array(170));
         $this->SetAligns(array('L'));
-        $this->Row(array((utf8_decode("\nActividades a realizar por el pasante: \n\n$rowPas[actividades]"))));
+        $this->Row(array((utf8_decode("\nEmita una opinión sobre el rendimiento académico del Pasante:\n\n\n"))));
+
+        $this->SetX(20);
+        $this->SetWidths(array(170));
+        $this->SetAligns(array('L'));
+        $this->Row(array((utf8_decode("\nEmita una opinión sobre el conocimiento de los equipos que manejó el Pasante:\n\n\n"))));
+
+        $this->SetX(20);
+        $this->SetWidths(array(170));
+        $this->SetAligns(array('L'));
+        $this->Row(array((utf8_decode("\n¿Qué recomendaciones daría Usted para completar la formación del Pasante?\n\n\n"))));
+
+        $this->SetX(20);
+        $this->SetWidths(array(170));
+        $this->SetAligns(array('L'));
+        $this->Row(array((utf8_decode("\nOtras sugerencias:\n\n\n"))));
 
 
+        $this->Ln();
         $this->SetX(20);
         $this->SetWidths(array(56, 57, 57));
         $this->SetAligns(array('L'));
-        $this->Row(array((utf8_decode("\nFirma del Pasante: ")), (utf8_decode("\nFirma del Supervisor Inmediato: \n\n\n\n\n ")), (utf8_decode("\nFirma del Coordinador de Pasantías: "))));
+        $this->Row(array((utf8_decode("\nFecha: ")), (utf8_decode("\nSello de la Empresa / Institución: \n\n\n\n\n ")), (utf8_decode("\nFirma del Supervisor Inmediato: "))));
     }
 }
 //Main
