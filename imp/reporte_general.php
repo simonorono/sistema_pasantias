@@ -95,6 +95,6 @@ $graph->Stroke("asd.png");
 $pdf->Image("asd.png", 0, 100, 200, 140);
 unlink("asd.png");
 
-$pdf->Output("reporte_pasantes.pdf" ,"D");
+$pdf->Output("reporte_general.pdf" ,"D");
 
 ?>

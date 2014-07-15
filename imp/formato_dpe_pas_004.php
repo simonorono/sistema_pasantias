@@ -90,8 +90,6 @@ class PDF extends FPDF
 
         $this->SetXY(30,230);
         $this->MultiCell(153,5,utf8_decode("\n______________________________\nProf. Olinto Rodríguez\nCoordinador de Pasantías de LICOM"), 0, "C", 0);
-
-
     }
 }
 
@@ -103,6 +101,6 @@ $pdf->AliasNbPages();
 $pdf->AddPage();
 $pdf->membrete();
 $pdf->cuerpo();
-$pdf->Output("formato_dpe_pas_002.pdf", "D");
+$pdf->Output("formato_dpe_pas_004.pdf", "D");
 
 ?>

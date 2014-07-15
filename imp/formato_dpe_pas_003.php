@@ -441,6 +441,6 @@ $pdf->AliasNbPages();
 $pdf->AddPage();
 $pdf->Membrete();
 $pdf->formatoTabla();
-$pdf->Output("formato_dpe_pas_002.pdf", "D");
+$pdf->Output("formato_dpe_pas_003.pdf", "D");
 
 ?>

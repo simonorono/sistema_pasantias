@@ -1,13 +1,15 @@
 <?php
 
-require_once("../fpdf/fpdf.php");
+//require_once("../fpdf/fpdf.php");
+require_once('../mc_table.php');
 require_once('jpgraph-3.5.0b1/src/jpgraph.php');
 require_once('jpgraph-3.5.0b1/src/jpgraph_pie.php');
 require_once("jpgraph-3.5.0b1/src/jpgraph_pie3d.php");
+require_once("jpgraph-3.5.0b1/src/jpgraph_bar.php");
 require_once('../db.php');
 require_once('../conteo.php');
 
-class reporte extends fpdf
+class reporte extends PDF_MC_Table
 {
 
 function graficarPDF()
@@ -20,6 +22,23 @@ function graficarPDF()
 	$solo_entrego_borrador = contar("SELECT COUNT(*) FROM pasantia INNER JOIN periodo ON periodo.id = pasantia.periodo_id WHERE pasantia.m06_entrego_borrador IS NOT NULL AND pasantia.m07_retiro_borrador IS NULL AND periodo.activo = TRUE");
 	$solo_retiro_borrador = contar("SELECT COUNT(*) FROM pasantia INNER JOIN periodo ON periodo.id = pasantia.periodo_id WHERE pasantia.m07_retiro_borrador IS NOT NULL AND pasantia.m08_entrega_final IS NULL AND periodo.activo = TRUE");
 	$finalizaron = contar("SELECT COUNT(*) FROM pasantia INNER JOIN periodo ON periodo.id = pasantia.periodo_id WHERE pasantia.m08_entrega_final IS NOT NULL AND periodo.activo = TRUE");
+
+
+	$this->MultiCell(200,5,utf8_decode("\nRepública Bolivariana de Venezuela\nUniversidad del Zulia\nFacultad Experimental de Ciencias\nDivisión de Programas Especiales\nSistema de Pasantías\n\n\n\nEstadísticas de Hitos"), 0, "C", 0);
+
+    //GENERAR LA TABLA
+    $this->SetXY(5,65);
+    $this->SetFont('Arial', 'B', 12);
+    $this->SetWidths(array(27,25,25,25,25,25,25,25));
+    $this->SetAligns(array('C','C','C','C','C','C','C','C','C','C','C'));
+    $this->Row(array("Registradas", "Aceptadas", "Numero Asignado", "Selladas", "Entrega Copia", "Entrega Borrador", "Retiro Borrador", "Finalizaron"));
+
+    $this->SetX(5);
+    $this->SetFont('Arial','',12);
+    $this->SetWidths(array(27,25,25,25,25,25,25,25));
+    $this->SetAligns(array('C','C','C','C','C','C','C','C'));
+
+    $this->Row(array("$solo_registrados", "$solo_aceptadas", "$solo_numero_asignado", "$solo_sellada", "$solo_entrego_copia", "$solo_entrego_borrador", "$solo_retiro_borrador", "$finalizaron"));
 
 	$data = array($solo_registrados, $solo_aceptadas, $solo_numero_asignado, $solo_sellada, $solo_entrego_copia, $solo_entrego_borrador, $solo_retiro_borrador, $finalizaron); //aqui va la cantidad que llevará cada parte del grafico
 
@@ -34,8 +53,6 @@ function graficarPDF()
 	$rowPer = pg_fetch_array($recoPer);
 
 
-	$this->MultiCell(200,5,utf8_decode("\nRepública Bolivariana de Venezuela\nUniversidad del Zulia\nFacultad Experimental de Ciencias\nDivisión de Programas Especiales\nSistema de Pasantías\n"), 0, "C", 0);
-
 	$graph->title->Set(utf8_decode("REPORTE TOTAL\n$rowPer[tipo] - $rowPer[anio]"));
 	$graph->title->SetFont(FF_FONT2,FS_BOLD);
 
@@ -48,7 +65,7 @@ function graficarPDF()
 
 	$graph->Add($p1);
 	$graph->Stroke("asd.png");
-	$this->Image("asd.png", -15, 60, 240, 180); // x, y, ancho, altura.
+	$this->Image("asd.png", -15, 85, 240, 180); // x, y, ancho, altura.
 	$this->Image("logotipo.jpg",20,12,-280);
 	unlink("asd.png");
 

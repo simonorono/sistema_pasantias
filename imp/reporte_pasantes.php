@@ -60,7 +60,7 @@ function transform($r) {
     }
 
     if ($r["m09_carga_nota"] != null) {
-        if ($r[13] == "t") {
+        if ($r["aprobada"] == "t") {
             $r["m09_carga_nota"] = "Aprobada";
         } else {
             $r["m09_carga_nota"] = "Reprobada";
