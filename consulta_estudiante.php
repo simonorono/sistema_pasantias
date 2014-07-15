@@ -3,6 +3,9 @@
 require_once ('globals.php');
 require_once('db.php');
 validate_session ('estudiante');
+$db = new PgDB();
+$id = session_var('usuario_id');
+$qry=$db->query("SELECT * FROM usuario,pasantia WHERE usuario.id = $id AND usuario.id=pasantia.usuario_id");
 
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -18,7 +21,10 @@ validate_session ('estudiante');
             </div>
             <?php require_once("include/menu_estudiantes.php"); ?>
             <div class="content">
-                <?php require_once ("include/fecha.php"); ?>
+                <?php require_once ("include/fecha.php");
+                if (pg_num_rows($qry)==0)
+                echo "<h2 align='center'> usted no se ha registrado como pasante</h2>";
+                else{ ?>
                 <div align="center">
                     <table>
                         <thead>
@@ -37,9 +43,7 @@ validate_session ('estudiante');
                             </tr>
                         </thead>
                         <?php
-$db = new PgDB();
-$id = session_var('usuario_id');
-$qry=$db->query("SELECT * FROM usuario,pasantia WHERE usuario.id = $id AND usuario.id=pasantia.usuario_id");
+
 $row= pg_fetch_array($qry);
 echo "<tr>";
 
@@ -101,7 +105,7 @@ else {
     echo "<th><p>---</p></th>";
 }
 
-echo "</tr>";
+echo "</tr>";}
 
 
                         ?>
