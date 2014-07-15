@@ -62,6 +62,6 @@ else {
     $qry = "INSERT INTO usuario (username, password, email, nombre, apellido, cedula, tipo, cod_carne, telefono_celu, telefono_habi, direccion) VALUES ('$username', '$hash_passwd', '$email', '$nombre', '$apellido', '$cedula', 'estudiante', '$cedula', '$telefono_celu', '$telefono_habi', '$direccion')";
 
     $db->query($qry);
-    header('Location: done.php?go=index.php');
+    header('Location: success.php?go=index.php');
 }
 ?>

@@ -45,7 +45,7 @@ for($i=0;$i<$tam_total;$i++)
             <th  scope="col">Número asignado</th>
             <th  scope="col">Carta sellada</th>
             <th  scope="col">Entrego copia</th>
-            <th  scope="col">Entrego borrador</th>
+            <th  scope="col">Enrego borrador</th>
             <th  scope="col">Retiro borrador</th>
             <th  scope="col">Entrega final</th>
             <th  scope="col">Carga de nota</th>
@@ -182,89 +182,94 @@ else
     else{
         $pos=$bandera* $TAMANO_PAGINA;
         $results= $db->query("SELECT * FROM usuario, pasantia WHERE usuario.cedula LIKE '%$busqueda%' AND pasantia.usuario_id = usuario.id AND pasantia.periodo_id=$rowp[id] LIMIT $TAMANO_PAGINA OFFSET '$pos'");
+        $num_total_registros=pg_num_rows($results);
     }
     if(pg_num_rows($results)<1) {
         echo "<h2>Ningún usuario posee la cédula buscada<h2>";
     }
     else {
-        while($row = pg_fetch_array($results))
+        //while($row = pg_fetch_array($results))
+        for ($i = 0; $i < $TAMANO_PAGINA; $i++)
         {
+            if($num_total_registros<=($i+$pos))
+                break;
+            $row = pg_fetch_row($results, ($i+$pos));
 
             echo "<tr>";
 
-            echo "<th>".$row['nombre']." ".$row['apellido']."</th>";
+            echo "<th>".$row[3]." ".$row[4]."</th>";
 
-            echo "<th>".$row['cedula']."</th>";
+            echo "<th>".$row[5]."</th>";
 
-            echo "<th>".date( "d/m/Y", strtotime($row['m01_registrada']))."</th>";
+            echo "<th>".date( "d/m/Y", strtotime($row[30]))."</th>";
 
-            if(!empty($row['m02_aceptada'])) {
-                echo "<th>".date( "d/m/Y", strtotime($row['m02_aceptada']))."</th>";
+            if(!empty($row[31])) {
+                echo "<th>".date( "d/m/Y", strtotime($row[31]))."</th>";
             }
             else {
                 echo "<th><p>---</p></th>";
             }
 
-            if(!empty($row['m03_numero_asignado'])) {
-                echo "<th>".date( "d/m/Y", strtotime($row['m03_numero_asignado']))."</th>";
+            if(!empty($row[32])) {
+                echo "<th>".date( "d/m/Y", strtotime($row[32]))."</th>";
             }
             else {
                 echo "<th><p>---</p></th>";
             }
 
-            if(!empty($row['m04_sellada'])) {
-                echo "<th>".date( "d/m/Y", strtotime($row['m04_sellada']))."</th>";
+            if(!empty($row[33])) {
+                echo "<th>".date( "d/m/Y", strtotime($row[33]))."</th>";
             }
-            else if(!empty($row['m03_numero_asignado'])) {
+            else if(!empty($row[32])) {
                 echo "<th><a href='marcar.php?id=$row[12]&n=4'>Marcar</a></th>";
             }
             else {
                 echo "<th><p>---</p></th>";
             }
 
-            if(!empty($row['m05_entrego_copia'])) {
-                echo "<th>".date( "d/m/Y", strtotime($row['m05_entrego_copia']))."</th>";
+            if(!empty($row[34])) {
+                echo "<th>".date( "d/m/Y", strtotime($row[34]))."</th>";
             }
-            else if(!empty($row['m04_sellada'])) {
+            else if(!empty($row[33])) {
                 echo "<th><a href='marcar.php?id=$row[12]&n=5'>Marcar</a></th>";
             }
             else {
                 echo "<th><p>---</p></th>";
             }
 
-            if(!empty($row['m06_entrego_borrador'])) {
-                echo "<th>".date( "d/m/Y", strtotime($row['m06_entrego_borrador']))."</th>";
+            if(!empty($row[35])) {
+                echo "<th>".date( "d/m/Y", strtotime($row[35]))."</th>";
             }
-            else if(!empty($row['m05_entrego_copia'])) {
+            else if(!empty($row[34])) {
                 echo "<th><a href='marcar.php?id=$row[12]&n=6'>Marcar</a></th>";
             }
             else {
                 echo "<th><p>---</p></th>";
             }
 
-            if(!empty($row['m07_retiro_borrador'])) {
-                echo "<th>".date( "d/m/Y", strtotime($row['m07_retiro_borrador']))."</th>";
+            if(!empty($row[36])) {
+                echo "<th>".date( "d/m/Y", strtotime($row[36]))."</th>";
             }
-            else if(!empty($row['m06_entrego_borrador'])) {
+            else if(!empty($row[35])) {
                 echo "<th><a href='marcar.php?id=$row[12]&n=7'>Marcar</a></th>";
             }
             else {
                 echo "<th><p>---</p></th>";
             }
 
-            if(!empty($row['m08_entrega_final'])) {
-                echo "<th>".date( "d/m/Y", strtotime($row['m08_entrega_final']))."</th>";
+            if(!empty($row[37])) {
+                echo "<th>".date( "d/m/Y", strtotime($row[37]))."</th>";
             }
-            else if(!empty($row['m07_retiro_borrador'])) {
+            else if(!empty($row[36])) {
                 echo "<th><a href='marcar.php?id=$row[12]&n=8'>Marcar</a></th>";
             }
             else {
                 echo "<th><p>---</p></th>";
             }
 
-            if(!empty($row['m09_carga_nota'])) {
+            if(!empty($row[38])) {
                 if(session_var('tipo_cuenta')=='tutor_licom')
-                    echo "<th>".date( "d/m/Y", strtotime($row['m09_carga_nota']))."</th>";
+                    echo "<th>".date( "d/m/Y", strtotime($row[38]))."</th>";
                 else
                     echo "<th>nota cargada</th>";
             }
@@ -282,15 +287,15 @@ else
 echo "</table>";
 if($busqueda)
 {
-    if($bandera==0 && ceil(pg_num_rows($results)/10)>1)
+    if($bandera==0 && ceil($num_total_registros/10)>1)
         echo "<a href='estado_pasantias.php?bandera=1&busqueda=".$busqueda."'>pagina siguiente</a>";
-    else if($bandera>0 &&$bandera<ceil(pg_num_rows($results)/10) ){
-        echo "<a href='estado_pasantias.php?bandera=".($bandera+1)."&busqueda=".$busqueda."'>pagina siguiente</a>";
+    else if($bandera>0 &&$bandera<ceil($num_total_registros/10) ){
+        echo "<a href='estado_pasantias.php?bandera=".($bandera+=1)."&busqueda=".$busqueda."'>pagina siguiente</a>";
         echo "<br>";
-        echo "<a href='estado_pasantias.php?bandera=".($bandera-1)."&busqueda=".$busqueda."'>pagina anterior</a>";
+        echo "<a href='estado_pasantias.php?bandera=".($bandera-=1)."&busqueda=".$busqueda."'>pagina anterior</a>";
     }
-    else if ($bandera==ceil(pg_num_rows($results)/10))
-        echo "<a href='estado_pasantias.php?bandera=".($bandera-1)."&busqueda=".$busqueda."'>pagina anterior</a>";
+    else if ($bandera==ceil($num_total_registros/10))
+        echo "<a href='estado_pasantias.php?bandera=".($bandera-=1)."&busqueda=".$busqueda."'>pagina anterior</a>";
 
 
 }
