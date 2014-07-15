@@ -44,11 +44,11 @@
                                 </p>
                                 <p>
                                     <label for="telefono_celu">Telefóno celular</label>
-                                    <input type="text" name="telefono_celu" id="telefono_celu" required/>
+                                    <input type="text" name="telefono_celu" id="telefono_celu" required pattern="^\d{11,11}$"/>
                                 </p>
                                 <p>
                                     <label for="telefono_habi">Telefóno de habitación</label>
-                                    <input type="text" name="telefono_habi" id="telefono_habi" required/>
+                                    <input type="text" name="telefono_habi" id="telefono_habi" required pattern="^\d{11,11}$"/>
                                 </p>
                                 <p>
                                     <label for="cedula">Cédula</label>

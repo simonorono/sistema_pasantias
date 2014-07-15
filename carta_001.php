@@ -16,6 +16,9 @@ if (pg_num_rows($result) == 0) {
     $error = 'pasantia';
 } else {
     $numero_carta = pg_fetch_row($result, 0)[0];
+    if ($numero_carta == null) {
+        $error = 'numero';
+    }
 }
 
 ?>

@@ -47,6 +47,45 @@ for (i = 0; i < elements.length; i++) {
                 case 'telefono_habi':
                     e.target.setCustomValidity('Debe ingresar su teléfono de habitación.');
                     break;
+                case 'compania':
+                    e.target.setCustomValidity('Debe ingresar el nombre de la compañía.');
+                    break;
+                case 'compania_email':
+                    e.target.setCustomValidity('Debe ingresar el correo electrónico de la compañía.');
+                    break;
+                case 'departamento':
+                    e.target.setCustomValidity('Debe ingresar el departamento dónde se realizara la pasantía.');
+                    break;
+                case 'direccion':
+                    e.target.setCustomValidity('Debe ingresar la dirección.');
+                    break;
+                case 'direccion':
+                    e.target.setCustomValidity('Debe ingresar la dirección.');
+                    break;
+                case 'dirigido_a':
+                    e.target.setCustomValidity('Debe ingresar el nombre de la persona a quien va dirigida la carta de postulación.');
+                    break;
+                case 'supervisor':
+                    e.target.setCustomValidity('Debe ingresar el nombre del supervisor de la pasantía.');
+                    break;
+                case 'cargo_supervisor':
+                    e.target.setCustomValidity('Debe ingresar el cargo del supervisor de la pasantía en la compañía.');
+                    break;
+                case 'actividad':
+                    e.target.setCustomValidity('Debe ingresar la actividad general que realizará el pasante en la compañía.');
+                    break;
+                case 'actividades':
+                    e.target.setCustomValidity('Debe ingresar las actividades específicas que realizará el pasante en la compañia.');
+                    break;
+                case 'horario':
+                    e.target.setCustomValidity('Debe ingresar el horario de trabajo del pasante.');
+                    break;
+                case 'fecha_inicio':
+                    e.target.setCustomValidity('Debe ingresar la fecha de inicio de la pasantía.');
+                    break;
+                case 'fecha_fin':
+                    e.target.setCustomValidity('Debe ingresar la fecha de finalización de la pasantía.');
+                    break;
                 default:
                     e.target.setCustomValidity('');
                     break;
@@ -68,6 +107,15 @@ for (i = 0; i < elements.length; i++) {
                     break;
                 case 'numero_carta':
                     e.target.setCustomValidity('Debe ingresar un código alfanumérico de tres carácteres.');
+                    break;
+                case 'telefono_celu':
+                    e.target.setCustomValidity('Debe tener el formato "0XXXXXXXXXX".');
+                    break;
+                case 'telefono_habi':
+                    e.target.setCustomValidity('Debe tener el formato "0XXXXXXXXXX".');
+                    break;
+                case 'telefono_ofic':
+                    e.target.setCustomValidity('Debe tener el formato "0XXXXXXXXXX".');
                     break;
                 default:
                     e.target.setCustomValidity('');
@@ -93,6 +141,15 @@ for (i = 0; i < elements.length; i++) {
                     break;
                 case 'numero_carta':
                     e.target.setCustomValidity('Debe ingresar un código alfanumérico de tres carácteres.');
+                    break;
+                case 'telefono_celu':
+                    e.target.setCustomValidity('Debe tener el formato "0XXXXXXXXXX".');
+                    break;
+                case 'telefono_habi':
+                    e.target.setCustomValidity('Debe tener el formato "0XXXXXXXXXX".');
+                    break;
+                case 'telefono_ofic':
+                    e.target.setCustomValidity('Debe tener el formato "0XXXXXXXXXX".');
                     break;
                 default:
                     e.target.setCustomValidity('');

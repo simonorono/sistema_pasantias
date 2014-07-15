@@ -53,11 +53,11 @@ if (isset($_GET['err'])) {
                             <td>
                                 <form method="post" action="do_inicio.php">
                                     <p>
-                                        <label for="usuario">Nombre de usuario</label>
+                                        <label for="username">Nombre de usuario</label>
                                         <input type="text" name="username" id="username" value="<?php echo $usr; ?>" required/>
                                     </p>
                                     <p>
-                                        <label for="clave">Contraseña</label>
+                                        <label for="password">Contraseña</label>
                                         <input type="password" name="password" id="password" required/>
                                     </p>
                                     <p align="center">
@@ -66,10 +66,11 @@ if (isset($_GET['err'])) {
                                 </form>
                             </td>
                         </tr>
-                        <td>&nbsp;
+                        <td>
                             <a href="registro.php" style="text-decoration-color: #03C">Registrarse</a>
                         </td>
                     </table>
+                    <script type="application/javascript" src="validaciones.js"></script>
                 </div>
             </div>
             <?php require_once("include/pie.php"); ?>

@@ -94,7 +94,7 @@ if (pg_num_rows($result) != 0) {
                                     <?php
         }
     } else {
-        if ($pasantia[16] == null) {
+        if ($pasantia[16] == "f") {
                                     ?>
                                     <a href="pasantia.php?validar=<?php echo $_GET['id'] ?>">Validar</a>  -
                                     <a style="paddig-left: 2px" href="pasantia.php?eliminar=<?php echo $_GET['id'] ?>">Eliminar</a>

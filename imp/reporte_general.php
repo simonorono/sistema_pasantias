@@ -1,7 +1,7 @@
 <?php
 
 require('../mc_table.php');
-require_once("../fpdf/fpdf.php");
+//require_once("../fpdf/fpdf.php");
 require_once('jpgraph-3.5.0b1/src/jpgraph.php');
 require_once('jpgraph-3.5.0b1/src/jpgraph_pie.php');
 require_once ("jpgraph-3.5.0b1/src/jpgraph_pie3d.php");
@@ -14,26 +14,36 @@ $pdf=new PDF_MC_Table('P', 'mm', 'Letter');
 $pdf->AddPage();
 $pdf->SetMargins(20,20);
 
-
-$pdf->SetFont('Arial','B',12);
-$pdf->MultiCell(0,5,utf8_decode("\nRepública Bolivariana de Venezuela\nUniversidad del Zulia\nFacultad Experimental de Ciencias\nDivisión de Programas Especiales\nSistema de Pasantías\n"), 0, "C", 0);
-$pdf->MultiCell(165,5,utf8_decode("\n\nReporte General"), 0, "C", 0);
-$pdf->Ln();
-
 $db = new PgDB();
 
-$query = "SELECT nombre, apellido, cedula, m01_registrada ::timestamp::date, m02_aceptada ::timestamp::date, m03_numero_asignado ::timestamp::date, m05_entrego_copia ::timestamp::date,
-			m06_entrego_borrador ::timestamp::date, m07_retiro_borrador ::timestamp::date,	m08_entrega_final ::timestamp::date, m09_carga_nota ::timestamp::date, aprobada
-			FROM usuario INNER JOIN pasantia ON usuario.id = pasantia.usuario_id AND usuario.tipo = 'estudiante'";
+//QUERY PARA LOS ESTUDIANTES DEL PERIODO ACTIVO
+/*$query = "SELECT nombre, apellido, cedula, m01_registrada ::timestamp::date, m02_aceptada ::timestamp::date, m03_numero_asignado ::timestamp::date, m05_entrego_copia ::timestamp::date,
+            m06_entrego_borrador ::timestamp::date, m07_retiro_borrador ::timestamp::date,  m08_entrega_final ::timestamp::date, m09_carga_nota ::timestamp::date, aprobada
+            FROM usuario INNER JOIN pasantia ON usuario.id = pasantia.usuario_id AND usuario.tipo = 'estudiante' INNER JOIN periodo ON periodo.id = pasantia.periodo_id AND periodo.activo = TRUE";
 
 
 $reco = pg_query($query);
 $row = pg_fetch_array($reco);
+*/
 
 
-$inscritos = contar("SELECT COUNT(*) FROM pasantia WHERE pasantia.m01_registrada IS NOT NULL");
-$aprobados = contar("SELECT COUNT(*) FROM pasantia WHERE pasantia.aprobada = TRUE");
-$reprobados = contar("SELECT COUNT(*) FROM pasantia WHERE pasantia.aprobada = FALSE");
+//QUERY PARA EL PERIDO ACTIVO
+$queryPer = "SELECT tipo, anio FROM periodo WHERE activo = TRUE";
+$recoPer = pg_query($queryPer);
+$rowPer = pg_fetch_array($recoPer);
+
+
+$pdf->SetFont('Arial','B',12);
+$pdf->MultiCell(0,5,utf8_decode("\nRepública Bolivariana de Venezuela\nUniversidad del Zulia\nFacultad Experimental de Ciencias\nDivisión de Programas Especiales\nSistema de Pasantías\n"), 0, "C", 0);
+$pdf->MultiCell(165,5,utf8_decode("\n\nReporte General"), 0, "C", 0);
+$pdf->MultiCell(165,5,utf8_decode("\n$rowPer[tipo] - $rowPer[anio]"), 0, "C", 0);
+$pdf->Ln();
+
+
+
+$inscritos = contar("SELECT COUNT(*) FROM pasantia INNER JOIN periodo ON periodo.id = pasantia.periodo_id AND periodo.activo = TRUE WHERE pasantia.m01_registrada IS NOT NULL");
+$aprobados = contar("SELECT COUNT(*) FROM pasantia INNER JOIN periodo ON periodo.id = pasantia.periodo_id AND periodo.activo = TRUE WHERE pasantia.aprobada = TRUE");
+$reprobados = contar("SELECT COUNT(*) FROM pasantia INNER JOIN periodo ON periodo.id = pasantia.periodo_id AND periodo.activo = TRUE WHERE pasantia.aprobada = FALSE");
 
 $pdf->Image("logotipo.jpg",20,12,-280);
 
@@ -85,6 +95,5 @@ $graph->Stroke("asd.png");
 $pdf->Image("asd.png", 0, 100, 200, 140);
 unlink("asd.png");
 
-//$pdf->Output("reporte_pasantes.pdf" ,"D");
-$pdf->Output();
+$pdf->Output("reporte_pasantes.pdf" ,"D");
 ?>
