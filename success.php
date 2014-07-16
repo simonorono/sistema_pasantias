@@ -16,13 +16,7 @@ $url = $_GET['go'];
                 <?php include("include/cabecera.php"); ?>
             </div>
             <?php
-if ($tipo == 'estudiante') {
-    require_once('include/menu_estudiante.php');
-} else if ($tipo == 'tutor_licom') {
-    require_once('include/menu_licom.php');
-} else {
-    require_once('include/menu_dpe.php');
-}
+require_once('include/menu_general.php');
             ?>
             <div class="content">
                 <?php require_once("include/fecha.php"); ?>
