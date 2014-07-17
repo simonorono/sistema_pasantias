@@ -21,10 +21,12 @@ $qry=$db->query("SELECT * FROM usuario,pasantia WHERE usuario.id = $id AND usuar
             </div>
             <?php require_once("include/menu_estudiantes.php"); ?>
             <div class="content">
-                <?php require_once ("include/fecha.php");
-                if (pg_num_rows($qry)==0)
-                echo "<h2 align='center'> usted no se ha registrado como pasante</h2>";
-                else{ ?>
+                <?php
+require_once ("include/fecha.php");
+if (pg_num_rows($qry)==0)
+    echo "<h2 align='center'>Usted no se ha registrado como pasante</h2>";
+else{
+                ?>
                 <div align="center">
                     <table>
                         <thead>
@@ -44,68 +46,68 @@ $qry=$db->query("SELECT * FROM usuario,pasantia WHERE usuario.id = $id AND usuar
                         </thead>
                         <?php
 
-$row= pg_fetch_array($qry);
-echo "<tr>";
+    $row= pg_fetch_array($qry);
+    echo "<tr>";
 
-echo "<th>".$row['nombre']." ".$row['apellido']."</th>";
+    echo "<th>".$row['nombre']." ".$row['apellido']."</th>";
 
-echo "<th>".$row['cedula']."</th>";
+    echo "<th>".$row['cedula']."</th>";
 
-echo "<th>".date( "d/m/Y", strtotime($row['m01_registrada']))."</th>";
+    echo "<th>".date( "d/m/Y", strtotime($row['m01_registrada']))."</th>";
 
-if(!empty($row['m02_aceptada'])) {
-    echo "<th>".date( "d/m/Y", strtotime($row['m02_aceptada']))."</th>";
-}
-else {
-    echo "<th><p>---</p></th>";
-}
-if(!empty($row['m03_numero_asignado'])) {
-    echo "<th>".date( "d/m/Y", strtotime($row['m03_numero_asignado']))."</th>";
-}
-else {
-    echo "<th><p>---</p></th>";
-}
-if(!empty($row['m04_sellada'])) {
-    echo "<th>".date( "d/m/Y", strtotime($row['m04_sellada']))."</th>";
-}
-else {
-    echo "<th><p>---</p></th>";
-}
-if(!empty($row['m05_entrego_copia'])) {
-    echo "<th>".date( "d/m/Y", strtotime($row['m05_entrego_copia']))."</th>";
-}
-else {
-    echo "<th><p>---</p></th>";
-}
-if(!empty($row['m06_entrego_borrador'])) {
-    echo "<th>".date( "d/m/Y", strtotime($row['m06_entrego_borrador']))."</th>";
-}
-else {
-    echo "<th><p>---</p></th>";
-}
-if(!empty($row['m07_retiro_borrador'])) {
-    echo "<th>".date( "d/m/Y", strtotime($row['m07_retiro_borrador']))."</th>";
-}
-else {
-    echo "<th><p>---</p></th>";
-}
-if(!empty($row['m08_entrega_final'])) {
-    echo "<th>".date( "d/m/Y", strtotime($row['m08_entrega_final']))."</th>";
-}
-else {
-    echo "<th><p>---</p></th>";
-}
-if(!empty($row['m09_carga_nota'])) {
-    if($row['aprobada']==true)
-        echo "<th><p>aprobado</p></th>";
-    else if($row['aprobada']==false)
-        echo "<th><p>reprobado</p></th>";
-}
-else {
-    echo "<th><p>---</p></th>";
-}
+    if(!empty($row['m02_aceptada'])) {
+        echo "<th>".date( "d/m/Y", strtotime($row['m02_aceptada']))."</th>";
+    }
+    else {
+        echo "<th><p>---</p></th>";
+    }
+    if(!empty($row['m03_numero_asignado'])) {
+        echo "<th>".date( "d/m/Y", strtotime($row['m03_numero_asignado']))."</th>";
+    }
+    else {
+        echo "<th><p>---</p></th>";
+    }
+    if(!empty($row['m04_sellada'])) {
+        echo "<th>".date( "d/m/Y", strtotime($row['m04_sellada']))."</th>";
+    }
+    else {
+        echo "<th><p>---</p></th>";
+    }
+    if(!empty($row['m05_entrego_copia'])) {
+        echo "<th>".date( "d/m/Y", strtotime($row['m05_entrego_copia']))."</th>";
+    }
+    else {
+        echo "<th><p>---</p></th>";
+    }
+    if(!empty($row['m06_entrego_borrador'])) {
+        echo "<th>".date( "d/m/Y", strtotime($row['m06_entrego_borrador']))."</th>";
+    }
+    else {
+        echo "<th><p>---</p></th>";
+    }
+    if(!empty($row['m07_retiro_borrador'])) {
+        echo "<th>".date( "d/m/Y", strtotime($row['m07_retiro_borrador']))."</th>";
+    }
+    else {
+        echo "<th><p>---</p></th>";
+    }
+    if(!empty($row['m08_entrega_final'])) {
+        echo "<th>".date( "d/m/Y", strtotime($row['m08_entrega_final']))."</th>";
+    }
+    else {
+        echo "<th><p>---</p></th>";
+    }
+    if(!empty($row['m09_carga_nota'])) {
+        if($row['aprobada']==true)
+            echo "<th><p>aprobado</p></th>";
+        else if($row['aprobada']==false)
+            echo "<th><p>reprobado</p></th>";
+    }
+    else {
+        echo "<th><p>---</p></th>";
+    }
 
-echo "</tr>";}
+    echo "</tr>";}
 
 
                         ?>

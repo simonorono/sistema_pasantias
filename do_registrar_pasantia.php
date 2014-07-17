@@ -65,6 +65,6 @@ else {
     $db->query($qry);
 }
 
-header ('Location: index.php');
+header ('Location: success.php?go=index.php');
 
 ?>

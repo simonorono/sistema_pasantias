@@ -33,7 +33,7 @@ else {
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>Sistema de pasantías. Administrador LiCom.</title>
+        <title>Sistema de pasantías.</title>
         <link href="css/estilo.css" rel="stylesheet" type="text/css" />
     </head>
     <body>
@@ -81,7 +81,7 @@ if (isset($error)) {
         echo "<option value='".$i."'>".($i+1)."</option>";
     }
                         ?>
-                        <input type="submit" style="border-style: hidden;" id="boton2" name="boton" value="aceptar"/>
+                        <input type="submit" id="boton2" name="boton" value="aceptar"/>
                     </form>
                     <table>
                         <thead>
@@ -104,7 +104,7 @@ if (isset($error)) {
     else{
         $pagina=$indice;
         if(isset($search))
-        $busqueda=$search;
+            $busqueda=$search;
         $pos = ($pagina) * $TAMANO_PAGINA;
 
     }
@@ -241,7 +241,4 @@ if($busqueda)
 
         background:transparent url("det1gmail.gif") left top no-repeat;
     }
-
-
-
 </style>

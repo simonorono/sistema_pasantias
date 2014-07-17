@@ -9,7 +9,7 @@ validate_session('tutor_licom');
 
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>Agregar periodo académico.</title>
+        <title>Sistema de pasantías.</title>
         <link href="css/estilo.css" rel="stylesheet" type="text/css" />
     </head>
 
