@@ -64,8 +64,9 @@ else {
                     <?php
 if (pg_num_rows($result) != 0) {
     $pasantia = pg_fetch_row($result, 0);
-    if ($pasantia[12] == "t") $pasantia[12] = "Sí";
-    else $pasantia = "No";
+    //var_dump($pasantia);die();
+    if ($pasantia[13] == "t") $pasantia[12] = "Sí";
+    else $pasantia[12] = "No";
     $pasantia[13] = date_format (DateTime::createFromFormat('Y-m-d 00:00:00', $pasantia[13]), 'd/m/Y');
     $pasantia[14] = date_format (DateTime::createFromFormat('Y-m-d 00:00:00', $pasantia[14]), 'd/m/Y');
                     ?>
